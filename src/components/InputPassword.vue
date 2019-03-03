@@ -1,0 +1,107 @@
+<template lang="pug">
+  #input_password
+    input(
+      type="password"
+      value=""
+      v-model="inputText"
+      @focus="onInputFocus"
+      @blur="onInputBlur"
+      @input="onInput"
+      ref='input')
+    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите пароль
+</template>
+
+<script>
+import _ from 'lodash'
+
+export default {
+  name: 'InputPassword',
+  data() {
+    return {
+      inputText: '',
+      isInputActive: false
+    }
+  },
+  computed: {
+    isSpanAside() {
+      return (this.isInputActive || (!this.isInputActive && this.inputText !== ''))
+    }
+  },
+  methods: {
+    onSpanClick() {
+      this.$refs.input.focus()
+    },
+    onInputFocus() {
+      this.isInputActive = true
+    },
+    onInputBlur() {
+      this.isInputActive = false
+    },
+    onInput: _.debounce(function() {
+      this.$emit('inputTextChange', {
+        value: this.inputText
+      })
+    }, 100)
+  }
+}
+</script>
+
+<style lang="less" scoped>
+  div#input_password {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    // height: 44px;
+    height: 58px;
+    width: 468px;
+    margin-top: 27px;
+    position: relative;
+    // height: 64px;
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding-left: 18px;
+
+    input {
+      width: 468px;
+      border: none;
+      /* 2018 */
+      // position: absolute;
+      height: 29px;
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: normal;
+      line-height: normal;
+      font-size: 22px;
+      color: #555555;
+      outline: none;
+      box-shadow: none;
+      margin-top: 20px;
+    }
+
+    span {
+      /* Введите промокод */
+      position: absolute;
+      width: fit-content;
+      height: 24px;
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: normal;
+      line-height: normal;
+      font-size: 18px;
+      color: #ABABAB;
+      // transition
+      transition-property: left, top, font-size;
+      transition-timing-function: ease-in-out;
+      transition-duration: .3s;
+
+      &.aside {
+        /* Введите промокод */
+        font-size: 13px;
+        height: 17px;
+        top: 8px;
+      }
+    }
+  }
+</style>

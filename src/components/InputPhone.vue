@@ -50,6 +50,7 @@ div#input_phone {
     font-size: 22px;
     color: #555555;
     outline: none;
+    box-shadow: none;
     margin-top: 20px;
   }
 

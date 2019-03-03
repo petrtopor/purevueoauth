@@ -19,7 +19,7 @@ export default {
       inputText: '',
       isInputActive: false,
       testString: 'vagiz',
-      response: null
+      isPromoCorrect: false
     }
   },
   computed: {
@@ -48,9 +48,6 @@ export default {
       } else {
         return false
       }
-    },
-    isPromoCorrect() {
-      return this.response !== null
     }
   },
   methods: {
@@ -64,9 +61,15 @@ export default {
       this.isInputActive = false
     },
     async checkPromo() {
-      this.response = await axios.get(
+      var response = await axios.get(
         'https://api.b2bfamily.com/version/v2/promo/' + this.inputText
       )
+      console.log('response: ', response)
+      if (response.data !== null) {
+        this.isPromoCorrect = true
+      } else {
+        this.isPromoCorrect = false
+      }
     },
     onInput: _.debounce(function() {
       this.checkPromo()

@@ -1,17 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Registration v-if="currentComponent === 'registration'"/>
+    <Login v-if="currentComponent === 'login'"/>
+    <!-- <router-link to="/registration">Go to registration</router-link> -->
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Registration from './components/Registration.vue'
+import Login from './components/Login.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Registration,
+    Login
+  },
+  data() {
+    return {
+      currentComponent: 'registration'
+    }
+  },
+  created() {
+    if(window.location.pathname.toLowerCase() === '/oauth/registration') {
+      this.currentComponent = 'registration'
+    }
+    if(window.location.pathname.toLowerCase() === '/oauth/login') {
+      this.currentComponent = 'login'
+    } else {
+      console.log('unknown pathname: ', window.location.pathname.toLowerCase())
+    }
   }
 }
 </script>
