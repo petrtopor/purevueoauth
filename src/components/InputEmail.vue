@@ -48,6 +48,7 @@ div#input_email {
     outline: none;
     box-shadow: none;
     margin-top: 20px;
+    padding-left: 0px!important;
   }
 
   span {

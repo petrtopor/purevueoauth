@@ -1,17 +1,21 @@
 <template lang="pug">
   #selector_crm
     .option
-      input(type='radio' name='foo' value='amo' v-model='selected' @change="crmSelect")
-      span amoCRM
+      input(type='radio' name='foo' value='amo' v-model='selected' @change="crmSelect" id="amo")
+      //- span amoCRM
+      label(for="amo") amoCRM
     .option
-      input(type='radio' name='foo' value='bitrix24' v-model='selected' @change="crmSelect")
-      span Битрикс24
+      input(type='radio' name='foo' value='bitrix24' v-model='selected' @change="crmSelect" id="bitrix24")
+      //- span Битрикс24
+      label(for="bitrix24") Битрикс24
     .option
-      input(type='radio' name='foo' value='other' v-model='selected' @change="crmSelect")
-      span Другой
+      input(type='radio' name='foo' value='other' v-model='selected' @change="crmSelect" id="other")
+      //- span Другой
+      label(for="other") Другой
     .option
-      input(type='radio' name='foo' value='none' v-model='selected' @change="crmSelect")
-      span Нет CRM
+      input(type='radio' name='foo' value='none' v-model='selected' @change="crmSelect" id="none")
+      //- span Нет CRM
+      label(for="none") Нет CRM
 </template>
 <script>
 export default {
@@ -41,7 +45,75 @@ div#selector_crm {
     display: flex;
     align-items: center;
 
+    input[type="radio"]:checked, 
+    input[type="radio"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+    input[type="radio"]:checked + label, 
+    input[type="radio"]:not(:checked) + label {
+      display: inline-block;
+      position: relative;
+      padding-left: 28px;
+      line-height: 20px;
+      cursor: pointer;
+    }
+    input[type="radio"]:checked + label:before {
+      content: "";
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      width: 18px;
+      height: 18px;
+      border: 4px solid #ff9f7d;
+      background-color: #f4f4f4;
+      border-radius: 100%;
+    }
+    input[type="radio"]:not(:checked) + label:before {
+      content: "";
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #e0e0e0;
+      background-color: #f4f4f4;
+      border-radius: 100%;
+    }
+
+    input[type="radio"]:checked + label:after, 
+    input[type="radio"]:not(:checked) + label:after {
+      content: "";
+      position: absolute;
+      -webkit-transition: all 0.2s ease;
+      -moz-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+
+      left: 5px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: #f4f4f4;
+    }
+    input[type="radio"]:not(:checked) + label:after {
+      opacity: 0;
+    }
+    input[type="radio"]:checked + label:after {
+      opacity: 1;
+    }
+
     span {
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: normal;
+      line-height: normal;
+      font-size: 14px;
+      color: #636363;
+      margin-left: 10px;
+    }
+    label {
       font-family: PT Sans;
       font-style: normal;
       font-weight: normal;

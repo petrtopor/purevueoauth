@@ -56,15 +56,17 @@
       #no_acc
         p Еще нет аккаунта?
         a(href="/oauth/registration") Зарегистрироваться
-      #no_pass
+      #no_pass(@click="onNoPassClick")
         p Я не получал
         p или забыл пароль
+    <PasswordReset v-if="showPasswordReset" @passwordReset="onPasswordReset"/>
 </template>
 
 <script>
 import InputEmailLogin from './InputEmailLogin.vue'
 import InputPassword from './InputPassword.vue'
 import ButtonLogin from './ButtonLogin.vue'
+import PasswordReset from './PasswordReset.vue'
 
 import axios from 'axios'
 
@@ -72,13 +74,15 @@ export default {
   components: {
     InputEmailLogin,
     InputPassword,
-    ButtonLogin
+    ButtonLogin,
+    PasswordReset
   },
   data() {
     return {
       email: '',
       isEmailValid: false,
-      password: ''
+      password: '',
+      showPasswordReset: false
     }
   },
   computed: {
@@ -87,6 +91,17 @@ export default {
     }
   },
   methods: {
+    onPasswordReset(response) {
+      this.showPasswordReset = false
+      if(response.data.state) {
+        window.TMess.Success('Письмо для восстановления пароля отправлено на указанный Вами email')
+      } else {
+        window.TMess.Error(response.data.error)
+      }
+    },
+    onNoPassClick() {
+      this.showPasswordReset = !this.showPasswordReset
+    },
     mlrOauthLoginClick() {
       window.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Authorization'
     },

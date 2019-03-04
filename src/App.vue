@@ -2,6 +2,7 @@
   <div id="app">
     <Registration v-if="currentComponent === 'registration'"/>
     <Login v-if="currentComponent === 'login'"/>
+    <AlreadyExists v-if="currentComponent === 'alreadyexists'"/>
     <!-- <router-link to="/registration">Go to registration</router-link> -->
     <!-- <router-view></router-view> -->
   </div>
@@ -10,12 +11,16 @@
 <script>
 import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'
+import AlreadyExists from './components/AlreadyExists'
+
+import _ from 'lodash'
 
 export default {
   name: 'app',
   components: {
     Registration,
-    Login
+    Login,
+    AlreadyExists
   },
   data() {
     return {
@@ -23,6 +28,9 @@ export default {
     }
   },
   created() {
+    if(_.includes(window.location.pathname.toLowerCase(), 'oauthcallback')) {
+      this.currentComponent = 'alreadyexists'
+    }
     if(window.location.pathname.toLowerCase() === '/oauth/registration') {
       this.currentComponent = 'registration'
     }

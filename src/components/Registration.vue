@@ -46,7 +46,7 @@
         span У меня есть промокод
       #acc_mujud
         span Уже есть аккаунт?&nbsp;
-        span.link Войти
+        span.link(@click="onAccMujudClick") Войти
     #disclaimer
       span Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете<br>наши политику конфиденциальности и договор оферты
 </template>
@@ -291,6 +291,9 @@ export default {
     }
   },
   methods: {
+    onAccMujudClick() {
+      window.location.href = '/oauth/Login'
+    },
     onButtonMailMlrClick() {
       document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&promocode=' + this.Promo
     },
@@ -336,6 +339,8 @@ export default {
           console.log('response.then: ', response);
           if (response.data.is_success) {
             document.location.href = response.data.redirect_url;
+          } else {
+            TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
           }
         })
         .catch(function(error) {
