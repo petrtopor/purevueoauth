@@ -98,7 +98,8 @@ export default {
 			color: #555555;
       outline: none;
       box-shadow: none;
-			margin-top: 20px;
+      margin-top: 20px;
+      padding-left: 0px!important;
 		}
 
 		span {
