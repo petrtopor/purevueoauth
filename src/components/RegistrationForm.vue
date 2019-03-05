@@ -5,7 +5,7 @@
     #label_1
       span войдите через свой почтовый аккаунт
     #buttons_mail
-      .button_mail.mlr(@click="onButtonMailMlrClick")
+      .button_mail.mlr
         <svg width="78" height="27" viewBox="0 0 78 27" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M77.8584 2.44824H75.3486V19.5271H77.8584V2.44824Z" fill="white" />
           <path fill-rule="evenodd" clip-rule="evenodd" d="M72.6164 19.526H70.1067V7.42317H72.6164V19.526ZM71.3616 2.02246C72.2968 2.02246 73.0562 2.78357 73.0562 3.72097C73.0562 4.65837 72.2968 5.41947 71.3616 5.41947C70.4263 5.41947 69.667 4.65837 69.667 3.72097C69.667 2.78357 70.4263 2.02246 71.3616 2.02246Z" fill="white" />
@@ -13,7 +13,7 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M36.2919 19.5455H33.8247V7.44272H36.2919V8.28818C36.8394 7.77162 37.8664 7.13373 39.2905 7.13184C41.0418 7.13184 42.3468 7.87019 43.2404 9.05782C44.2182 7.88157 45.8305 7.13184 47.4731 7.13184C50.5559 7.13184 52.6571 9.218 52.6571 12.469V19.5455H50.1899V12.469C50.1899 10.89 48.9076 9.60471 47.3322 9.60471C45.7558 9.60471 44.4745 10.89 44.4745 12.469V19.5455H42.0073V12.469C42.0073 10.89 40.725 9.60471 39.1496 9.60471C37.5742 9.60471 36.2919 10.89 36.2919 12.469V19.5455Z" fill="white" />
           <path d="M17.221 13.2696C17.221 15.4704 15.4347 17.2609 13.2389 17.2609C11.0431 17.2609 9.25684 15.4704 9.25684 13.2696C9.25684 11.0687 11.0431 9.27827 13.2389 9.27827C15.4347 9.27827 17.221 11.0687 17.221 13.2696ZM13.2389 0C5.9386 0 0 5.95235 0 13.2696C0 20.5868 5.9386 26.5391 13.2389 26.5391C15.9132 26.5391 18.4919 25.7411 20.6962 24.2312L20.734 24.2046L18.9506 22.127L18.9203 22.146C17.2238 23.2407 15.2588 23.8189 13.2389 23.8189C7.43554 23.8189 2.71398 19.0864 2.71398 13.2696C2.71398 7.45276 7.43554 2.72026 13.2389 2.72026C19.0423 2.72026 23.7639 7.45276 23.7639 13.2696C23.7639 14.0231 23.6797 14.7861 23.5161 15.5368C23.1832 16.9064 22.2263 17.3253 21.5085 17.2703C20.786 17.2116 19.9406 16.696 19.935 15.4335V14.4714V13.2696C19.935 9.5683 16.9316 6.55801 13.2389 6.55801C9.54621 6.55801 6.54286 9.5683 6.54286 13.2696C6.54286 16.9708 9.54621 19.9811 13.2389 19.9811C15.0328 19.9811 16.7151 19.2788 17.9832 18.0002C18.7208 19.1508 19.9227 19.8721 21.291 19.9821C21.4083 19.9915 21.5284 19.9963 21.6466 19.9963C22.6102 19.9963 23.5643 19.6731 24.3341 19.0883C25.1275 18.4836 25.7204 17.6106 26.0476 16.5614C26.0996 16.3917 26.196 16.004 26.196 16.0012L26.1989 15.987C26.3918 15.1453 26.4778 14.3065 26.4778 13.2696C26.4778 5.95235 20.5392 0 13.2389 0Z" fill="#FF9E00" />
         </svg>
-      .button_mail.ynd(@click="onButtonMailYndClick")
+      .button_mail.ynd
         <svg width="56" height="22" viewBox="0 0 56 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7.34463 10.5147H6.25073C4.53186 10.5147 2.865 9.27793 2.865 6.18524C2.865 2.96422 4.42781 1.64986 6.01628 1.64986H7.34463V10.5147ZM9.06351 0.000561953H6.09467C3.17714 0.000561953 0.703576 2.1914 0.703576 6.44332C0.703576 8.99447 1.90152 10.8758 4.03729 11.803L0.0522268 18.9156C-0.0781855 19.1476 0.0522267 19.3281 0.260316 19.3281H2.10961C2.26567 19.3281 2.37043 19.2767 2.42245 19.1476L6.04264 12.164H7.34463V19.1476C7.34463 19.2252 7.42302 19.3281 7.52707 19.3281H9.1419C9.29797 19.3281 9.34999 19.2506 9.34999 19.1222V0.257935C9.34999 0.0781279 9.24594 0.000561953 9.06351 0.000561953Z" fill="#ED1E24" />
           <path d="M18.8533 6.40649H17.2384C17.108 6.40649 17.0304 6.50944 17.0304 6.587V11.5088H14.0351V6.587C14.0351 6.45796 13.9831 6.40649 13.8527 6.40649H12.2379C12.1082 6.40649 12.0298 6.48405 12.0298 6.587V19.1115C12.0298 19.2398 12.0818 19.3174 12.2115 19.3174H13.8527C13.9568 19.3174 14.0351 19.2398 14.0351 19.1115V13.1327H17.0304V19.1115C17.0304 19.2398 17.108 19.3174 17.2384 19.3174H18.8533C18.9837 19.3174 19.0357 19.2137 19.0357 19.1115V6.587C19.0357 6.48405 18.9573 6.40649 18.8533 6.40649Z" fill="#231F20" />
@@ -22,7 +22,7 @@
           <path d="M26.6663 17.6938H22.89C24.2184 15.4522 24.7393 12.9264 24.9217 9.83374C24.9738 9.16386 24.9994 8.46861 24.9994 8.03002H26.6663V17.6938ZM29.4791 17.6938H29.1669C28.7757 17.6938 28.6716 17.5394 28.6716 17.2298V6.58733C28.6716 6.45829 28.6196 6.40681 28.5156 6.40681H23.3069C23.1765 6.40681 23.0981 6.48367 23.0981 6.58733V7.51457C23.0981 10.6326 22.9164 14.6533 21.2495 17.6938H20.6759C20.5198 17.6938 20.4678 17.7714 20.4678 17.8997V21.6623C20.4678 21.7913 20.5718 21.8428 20.6502 21.8428H21.9002C22.1867 21.8428 22.2907 21.6369 22.2907 21.4564V19.317H27.8642V21.6623C27.8642 21.7652 27.9426 21.8428 28.0467 21.8428H29.375C29.5311 21.8428 29.6879 21.7137 29.6879 21.4564V17.8997C29.6879 17.7714 29.6095 17.6938 29.4791 17.6938Z" fill="#231F20" />
           <path d="M34.5053 11.6891C33.9067 11.6891 32.9688 11.792 32.9688 11.792C32.9688 11.792 32.9688 11.4056 33.0208 10.9931C33.2553 8.80296 33.8019 7.6945 34.7141 7.6945C35.5471 7.6945 36.0681 8.82835 36.1985 10.8133C36.2241 11.2251 36.2241 11.6891 36.2241 11.6891H34.5053ZM34.7917 6.09739C31.979 6.09739 30.729 9.60187 30.729 13.4159C30.729 17.3068 32.4999 19.626 35.1046 19.626C36.3802 19.626 37.5005 19.1366 38.0734 18.7756C38.1775 18.7241 38.2038 18.6473 38.1775 18.5436L37.9694 17.6678C37.943 17.5649 37.891 17.5134 37.7606 17.5134C37.6565 17.5134 36.9011 17.7969 35.8336 17.7969C33.8283 17.7969 32.8904 16.07 32.8904 13.8023V13.1924C32.8904 13.1924 33.9067 13.313 34.5053 13.313H38.3079V12.2306C38.3079 8.23604 36.8755 6.09739 34.7917 6.09739Z" fill="#231F20" />
         </svg>
-      .button_mail.gml(@click="onButtonMailGmlClick")
+      .button_mail.gml
         <svg width="92" height="33" viewBox="0 0 92 33" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <rect x="0.265625" width="90.7898" height="33" fill="url(#pattern0)" />
           <defs>
@@ -46,12 +46,11 @@
         span У меня есть промокод
       #acc_mujud
         span Уже есть аккаунт?&nbsp;
-        span.link(@click="onAccMujudClick") Войти
+        span.link Войти
     #disclaimer
       span Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете<br>наши политику конфиденциальности и договор оферты
 </template>
 <style lang="less" scoped>
-// @import url('https://fonts.googleapis.com/css?family=PT+Sans');
 div#container {
   display: flex;
   flex-direction: column;
@@ -68,8 +67,7 @@ div#container {
       /* Зарегистрируйтесь и закрывайте еще больше сделок */
       width: 357px;
       height: 63px;
-      // font-family: 'PT Sans', sans-serif;
-      font-family: 'PT Sans', sans-serif;
+      font-family: 'PT Sans', sans-serif;;
       font-style: normal;
       font-weight: bold;
       line-height: normal;
@@ -96,7 +94,7 @@ div#container {
       height: 19px;
       left: 843px;
       top: 243px;
-      font-family: 'PT Sans', sans-serif;
+      font-family: 'PT Sans', sans-serif;;
       font-style: normal;
       font-weight: normal;
       line-height: normal;
@@ -182,7 +180,7 @@ div#container {
     span {
       /* Какой CRM системой вы пользуетесь? */
       height: 16px;
-      font-family: 'PT Sans', sans-serif;
+      font-family: PT Sans;
       font-style: normal;
       font-weight: normal;
       line-height: normal;
@@ -201,7 +199,7 @@ div#container {
     div#prm_mujud {
       span {
         /* У меня есть промокод */
-        font-family: 'PT Sans', sans-serif;
+        font-family: PT Sans;
         font-style: normal;
         font-weight: normal;
         line-height: normal;
@@ -214,7 +212,7 @@ div#container {
     div#acc_mujud {
       span {
         /* Уже есть аккаунт? */
-        font-family: 'PT Sans', sans-serif;
+        font-family: PT Sans;
         font-style: normal;
         font-weight: normal;
         line-height: normal;
@@ -224,7 +222,7 @@ div#container {
 
       span.link {
         /* Войти */
-        font-family: 'PT Sans', sans-serif;
+        font-family: PT Sans;
         font-style: normal;
         font-weight: bold;
         line-height: normal;
@@ -246,7 +244,7 @@ div#container {
 
     span {
       /* Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете наши политику конфиденциальности и договор оферты */
-      font-family: 'PT Sans', sans-serif;
+      font-family: PT Sans;
       font-style: normal;
       font-weight: normal;
       line-height: normal;
@@ -267,6 +265,7 @@ import ButtonRegistration from './ButtonRegistration.vue'
 import axios from 'axios'
 
 export default {
+  name: 'RegistrationForm',
   components: {
     SelectorCrm,
     InputEmail,
@@ -282,7 +281,7 @@ export default {
       isPromoInputValid: false,
       RegEmail: '',
       RegPhone: '',
-      CrmName: 'none',
+      CrmName: '',
       Promo: '',
       Language: ''
     }
@@ -293,18 +292,6 @@ export default {
     }
   },
   methods: {
-    onAccMujudClick() {
-      window.location.href = '/oauth/Login'
-    },
-    onButtonMailMlrClick() {
-      document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&promocode=' + this.Promo
-    },
-    onButtonMailYndClick() {
-      document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
-    },
-    onButtonMailGmlClick() {
-      document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo
-    },
     toggleShowInputPromo() {
       this.showInputPromo = !this.showInputPromo
     },
@@ -327,23 +314,18 @@ export default {
     onRegClick() {
       axios
         // eslint-disable
-        .post('/Account/PostRegister', {
-          model: {
-            RegEmail: this.RegEmail,
-            RegPhone: this.RegPhone,
-            CrmName: this.CrmName,
-            Promo: this.Promo,
-            Language: 'ru'
+        .post('https://b2bfamily.com/Account/PostRegister', JSON.stringify({
+          'model': {
+            'RegEmail': this.RegEmail,
+            'RegPhone': this.RegPhone,
+            'CrmName': this.CrmName,
+            'Promo': this.Promo,
+            'Language': 'ru'
           }
-        })
+        }))
         .then(function(response) {
           // eslint-disable-next-line
           console.log('response.then: ', response);
-          if (response.data.is_success) {
-            document.location.href = response.data.redirect_url;
-          } else {
-            TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
-          }
         })
         .catch(function(error) {
           // eslint-disable-next-line

@@ -34,7 +34,7 @@ div#button_login {
 
   span {
     /* Войти */
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: bold;
     line-height: normal;

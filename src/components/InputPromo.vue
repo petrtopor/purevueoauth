@@ -101,7 +101,7 @@ div#input_promo {
       /* 2018 */
       // position: absolute;
       height: 29px;
-      font-family: PT Sans;
+      font-family: 'PT Sans', sans-serif;
       font-style: normal;
       font-weight: normal;
       line-height: normal;
@@ -115,7 +115,7 @@ div#input_promo {
       position: absolute;
       width: fit-content;
       height: 24px;
-      font-family: PT Sans;
+      font-family: 'PT Sans', sans-serif;
       font-style: normal;
       font-weight: normal;
       line-height: normal;

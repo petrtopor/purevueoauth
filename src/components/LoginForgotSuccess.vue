@@ -73,7 +73,7 @@ div#login_forgot_success {
 
 
       span {
-        font-family: 'PT Sans' !important;
+        font-family: 'PT Sans', sans-serif!important;
         font-size: 21px;
         font-weight: 700;
         color: rgb(85, 85, 85);
@@ -90,7 +90,7 @@ div#login_forgot_success {
         font-size: 15px;
         color: #989898;
         font-weight: 300;
-        font-family: 'PT Sans' !important;
+        font-family: 'PT Sans', sans-serif!important;
       }
     }
 
@@ -103,7 +103,7 @@ div#login_forgot_success {
         color: #F17C53;
         font-size: 13px;
         font-weight: 300;
-        font-family: 'PT Sans' !important;
+        font-family: 'PT Sans', sans-serif!important;
       }
     }
 

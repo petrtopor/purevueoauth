@@ -43,7 +43,7 @@ div#input_phone {
     /* 2018 */
     // position: absolute;
     height: 29px;
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     line-height: normal;
@@ -60,7 +60,7 @@ div#input_phone {
     position: absolute;
     width: fit-content;
     height: 24px;
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     line-height: normal;

@@ -20,7 +20,7 @@ div#button_registration {
 
   span {
     /* Зарегистрироваться бесплатно */
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: bold;
     line-height: normal;

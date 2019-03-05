@@ -61,8 +61,8 @@ div#selector_crm {
     input[type="radio"]:checked + label:before {
       content: "";
       position: absolute;
-      left: 1px;
-      top: 1px;
+      left: 0px;
+      top: -2px;
       width: 18px;
       height: 18px;
       border: 4px solid #ff9f7d;
@@ -72,8 +72,8 @@ div#selector_crm {
     input[type="radio"]:not(:checked) + label:before {
       content: "";
       position: absolute;
-      left: 1px;
-      top: 1px;
+      left: 2px;
+      top: 0px;
       width: 18px;
       height: 18px;
       border: 2px solid #e0e0e0;
@@ -105,7 +105,7 @@ div#selector_crm {
     }
 
     span {
-      font-family: PT Sans;
+      font-family: PT Sans, sans-serif;
       font-style: normal;
       font-weight: normal;
       line-height: normal;
@@ -114,7 +114,7 @@ div#selector_crm {
       margin-left: 10px;
     }
     label {
-      font-family: PT Sans;
+      font-family: PT Sans, sans-serif;
       font-style: normal;
       font-weight: normal;
       line-height: normal;

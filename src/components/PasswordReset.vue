@@ -109,7 +109,7 @@ div#container {
     cursor: pointer;
     
     span {
-      font-family: 'PT Sans';
+      font-family: 'PT Sans', sans-serif;;
       font-style: normal;
       font-weight: bold;
       line-height: normal;

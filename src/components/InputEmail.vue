@@ -39,7 +39,7 @@ div#input_email {
     /* 2018 */
     // position: absolute;
     height: 29px;
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     line-height: normal;
@@ -56,7 +56,7 @@ div#input_email {
     position: absolute;
     width: fit-content;
     height: 24px;
-    font-family: PT Sans;
+    font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: normal;
     line-height: normal;

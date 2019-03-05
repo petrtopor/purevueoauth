@@ -152,7 +152,7 @@ div#container {
 			/* Зарегистрируйтесь и закрывайте еще больше сделок */
 			width: 357px;
 			height: 32px;
-			font-family: PT Sans;
+			font-family: 'PT Sans', sans-serif;
 			font-style: normal;
 			font-weight: bold;
 			line-height: normal;
@@ -175,7 +175,7 @@ div#container {
 
 		div.label_text {
 			span {
-				font-family: PT Sans;
+				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
 				font-weight: normal;
 				line-height: normal;
@@ -226,7 +226,7 @@ div#container {
 		
 		div.label_text {
 			span {
-				font-family: PT Sans;
+				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
 				font-weight: normal;
 				line-height: normal;
@@ -259,7 +259,7 @@ div#container {
 			/* 2018 */
 			// position: absolute;
 			height: 29px;
-			font-family: PT Sans;
+			font-family: 'PT Sans', sans-serif;
 			font-style: normal;
 			font-weight: normal;
 			line-height: normal;
@@ -274,7 +274,7 @@ div#container {
 			position: absolute;
 			width: fit-content;
 			height: 24px;
-			font-family: PT Sans;
+			font-family: 'PT Sans', sans-serif;
 			font-style: normal;
 			font-weight: normal;
 			line-height: normal;
@@ -316,7 +316,7 @@ div#container {
 			/* 2018 */
 			// position: absolute;
 			height: 29px;
-			font-family: PT Sans;
+			font-family: 'PT Sans', sans-serif;
 			font-style: normal;
 			font-weight: normal;
 			line-height: normal;
@@ -331,7 +331,7 @@ div#container {
 			position: absolute;
 			width: fit-content;
 			height: 24px;
-			font-family: PT Sans;
+			font-family: 'PT Sans', sans-serif;
 			font-style: normal;
 			font-weight: normal;
 			line-height: normal;
@@ -363,7 +363,7 @@ div#container {
 
 		span {
 			/* Войти */
-			font-family: PT Sans;
+			font-family: 'PT Sans', sans-serif;
 			font-style: normal;
 			font-weight: bold;
 			line-height: normal;
@@ -401,7 +401,7 @@ div#container {
 				text-align: left;
 				align-content: flex-start;
 				margin-bottom: 0px;
-				font-family: PT Sans;
+				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
 				font-weight: normal;
 				line-height: normal;
@@ -414,7 +414,7 @@ div#container {
 				text-align: left;
 				align-content: flex-start;
 				margin-bottom: 0px;
-				font-family: PT Sans;
+				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
 				font-weight: normal;
 				line-height: normal;
@@ -442,7 +442,7 @@ div#container {
 				text-align: right;
 				align-content: flex-end;
 				margin-bottom: 0px;
-				font-family: PT Sans;
+				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
 				font-weight: normal;
 				line-height: normal;
