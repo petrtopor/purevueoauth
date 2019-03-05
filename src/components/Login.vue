@@ -59,7 +59,7 @@
       #no_pass(@click="onNoPassClick")
         p Я не получал
         p или забыл пароль
-    <PasswordReset v-if="showPasswordReset" @passwordReset="onPasswordReset"/>
+    <PasswordReset v-if="showPasswordReset" @passwordReset="onPasswordReset" @close="onPasswordResetClose"/>
 </template>
 
 <script>
@@ -92,6 +92,7 @@ export default {
   },
   mounted() {
     /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    BEGIN    */
+    /*
     var initialX = 0
     var initialY = 0
     var offsetX = 0
@@ -122,9 +123,18 @@ export default {
     container.addEventListener('mouseup', event => {
       isActive = false
     })
+    */
     /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    END    */
   },
   methods: {
+    onPasswordResetClose(container) {
+      _.forEach(_.filter(container.parentNode.childNodes, childNode => childNode !== container), otherNode => {
+        otherNode.style.filter = ''
+        otherNode.style['pointer-events'] = ''
+        otherNode.style['user-select'] = ''
+      })
+      this.showPasswordReset = false
+    },
     onPasswordReset(response) {
       this.showPasswordReset = false
       if(response.data.state) {

@@ -33,6 +33,9 @@ div#button_registration {
     background: linear-gradient(125.63deg, #fe9f7c 12.79%, #fe7d7b 95.63%);
     box-shadow: 0px 5px 12px rgba(60, 28, 28, 0.21);
     cursor: pointer;
+    span {
+      cursor: pointer;
+    }
   }
 }
 </style>

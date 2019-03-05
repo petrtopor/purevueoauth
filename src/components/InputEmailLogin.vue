@@ -1,14 +1,22 @@
 <template lang="pug">
   #input_email
     //- input(type="text" value="")
-    masked-input(
+    //- masked-input(
+    //-   type="text"
+    //-   name="email"
+    //-   class="form-control"
+    //-   v-model="inputText"
+    //-   :mask="emailMask"
+    //-   :guide="false"
+    //-   placeholderChar="_"
+    //-   @focus="onInputFocus"
+    //-   @blur="onInputBlur"
+    //-   @input="onInput"
+    //-   ref='input')
+    input(
       type="text"
       name="email"
-      class="form-control"
       v-model="inputText"
-      :mask="emailMask"
-      :guide="false"
-      placeholderChar="_"
       @focus="onInputFocus"
       @blur="onInputBlur"
       @input="onInput"
@@ -34,6 +42,14 @@ export default {
       isInputActive: false
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      if(this.inputText !== '') {
+        this.$refs.parentNode.click()
+        console.log('email input is dirty')
+      }
+    })
+  },
   computed: {
     isSpanAside() {
       // eslint-disable-next-line
@@ -46,7 +62,8 @@ export default {
   },
   methods: {
     onSpanClick() {
-      this.$refs.input.$el.focus()
+      // this.$refs.input.$el.focus()
+      this.$refs.input.focus()
     },
     onInputFocus() {
       this.isInputActive = true

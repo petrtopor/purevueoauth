@@ -1,5 +1,8 @@
 <template lang="pug">
-  #container
+  #container(ref="container")
+    #close_button(@click="onCloseClick")
+      .cross_part(@click="onCloseClick")
+      .cross_part(@click="onCloseClick")
     #caption
       span Восстановление пароля
     #label
@@ -12,17 +15,35 @@
 <script>
 import InputEmailPasswordReset from './InputEmailPasswordReset.vue'
 import axios from 'axios'
+import _ from 'lodash'
 export default {
   name: 'PasswordReset',
   components: {
     InputEmailPasswordReset
   },
+  mounted() {
+    this.container = this.$refs.container
+    // console.log('PasswordReset::this.$refs.container: ', this.container)
+    this.$nextTick(() => _.forEach(_.filter(this.container.parentNode.childNodes, childNode => childNode !== this.container), otherNode => {
+      otherNode.style.filter = 'blur(2px)'
+      otherNode.style['pointer-events'] = 'none'
+      otherNode.style['user-select'] = 'none'
+    }))
+  },
+  beforeDestroy() {
+    // const container = this.$refs.container
+    // _.forEach(_.filter(container.parentNode.childNodes, childNode => childNode !== container), otherNode => otherNode.style.filter = '')
+  },
   data() {
     return {
-      email: ''
+      email: '',
+      container: null
     }
   },
   methods: {
+    onCloseClick() {
+      this.$emit('close', this.container)
+    },
     onEmailChange(payload) {
       this.email = payload.value
     },
@@ -33,6 +54,7 @@ export default {
         }
       }
       axios.post('/Account/PostResetPassword', payload).then(response => {
+        this.$emit('close', this.container)
         this.$emit('passwordReset', response)
       }).catch(error => {
         console.log('error: ', error)
@@ -52,6 +74,32 @@ div#container {
   top: 200px;
   left: calc(50vw - (468px / 2));
   padding: 20px;
+
+  div#close_button {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    // left: 440px;
+    left: calc(100% - 45px);
+    // top: -30px;
+    // transform: scale(0.5, 0.5);
+    transform: rotate(45deg);
+    cursor: pointer;
+
+    div.cross_part {
+      height: 32px;
+      width: 6px;
+      background-color: #555;
+      position: absolute;
+      left: 12px;
+      top: -1px;
+      border-radius: 2px;
+
+      &:nth-child(2) {
+        transform: rotate(90deg);
+      }
+    }
+  }
 
   div#caption {
 		display: flex;

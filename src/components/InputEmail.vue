@@ -1,14 +1,22 @@
 <template lang="pug">
   #input_email
     //- input(type='text')
-    masked-input(
+    //- masked-input(
+    //-   type="text"
+    //-   name="email"
+    //-   class="form-control"
+    //-   v-model="inputText"
+    //-   :mask="emailMask"
+    //-   :guide="false"
+    //-   placeholderChar="_"
+    //-   @focus="onInputFocus"
+    //-   @blur="onInputBlur"
+    //-   @input="onInput"
+    //-   ref='input')
+    input(
       type="text"
       name="email"
-      class="form-control"
       v-model="inputText"
-      :mask="emailMask"
-      :guide="false"
-      placeholderChar="_"
       @focus="onInputFocus"
       @blur="onInputBlur"
       @input="onInput"
@@ -107,7 +115,8 @@ export default {
   },
   methods: {
     onSpanClick() {
-      this.$refs.input.$el.focus()
+      // this.$refs.input.$el.focus()
+      this.$refs.input.focus()
     },
     onInputFocus() {
       this.isInputActive = true

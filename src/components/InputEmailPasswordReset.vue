@@ -74,7 +74,8 @@ div#input_email {
   align-items: center;
   // height: 44px;
   height: 58px;
-  width: 468px;
+  // width: 468px;
+  width: 100%;
   // width: 424px;
   margin-top: 12px;
   position: relative;
