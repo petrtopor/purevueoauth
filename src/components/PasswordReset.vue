@@ -33,12 +33,6 @@ export default {
         }
       }
       axios.post('/Account/PostResetPassword', payload).then(response => {
-        // console.log('response: ', response)
-        // if(response.data.state) {
-        //   window.TMess.Error('Всё ништяк')
-        // } else {
-        //   window.TMess.Error(response.data.error)
-        // }
         this.$emit('passwordReset', response)
       }).catch(error => {
         console.log('error: ', error)
@@ -50,8 +44,10 @@ export default {
 
 <style lang="less" scoped>
 div#container {
-  // border: solid;
-  background-color: rgb(202, 28, 28);
+  border: solid 1px;
+  border-radius: 4px;
+  border-color: #E0E0E0;
+  background-color: white!important;
   position: absolute;
   top: 200px;
   left: calc(50vw - (468px / 2));

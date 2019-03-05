@@ -1,5 +1,5 @@
 <template lang="pug">
-  #container
+  #container(ref="container")
     #caption
       span Вход
     #buttons_mail
@@ -89,6 +89,40 @@ export default {
     isButtonLoginActive() {
       return this.isEmailValid && this.password !== ''
     }
+  },
+  mounted() {
+    /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    BEGIN    */
+    var initialX = 0
+    var initialY = 0
+    var offsetX = 0
+    var offsetY = 0
+    var currentX = 0
+    var currentY = 0
+    var isActive = false
+    const container = this.$refs.container
+    container.addEventListener('mousedown', event => {
+      if(event.target.id === 'container') {
+        isActive = true
+        initialX = event.clientX - offsetX;
+        initialY = event.clientY - offsetY;
+      } else {
+        console.log('target wrong, target is: ', event.target)
+      }
+    })
+    container.addEventListener('mousemove', event => {
+      if(isActive === true) {
+        event.preventDefault()
+        currentX = event.clientX - initialX;
+        currentY = event.clientY - initialY;
+        offsetX = currentX;
+        offsetY = currentY;
+        event.target.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)"
+      }
+    })
+    container.addEventListener('mouseup', event => {
+      isActive = false
+    })
+    /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    END    */
   },
   methods: {
     onPasswordReset(response) {
@@ -385,7 +419,8 @@ div#container {
 	div#no_acc_no_pass {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
+    justify-content: space-between;
+    align-items: flex-end;
 		width: 100%;
 		margin-top: 13px;
 
@@ -440,7 +475,8 @@ div#container {
 
 			p {
 				text-align: right;
-				align-content: flex-end;
+        align-content: flex-end;
+        margin-top: 0px;
 				margin-bottom: 0px;
 				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
