@@ -32,6 +32,7 @@ export default {
   }
 }
 </script>
+
 <style lang="less" scoped>
 div#selector_crm {
   display: flex;
@@ -61,8 +62,8 @@ div#selector_crm {
     input[type="radio"]:checked + label:before {
       content: "";
       position: absolute;
-      left: 0px;
-      top: -2px;
+      left: 2px;
+      top: 2px;
       width: 18px;
       height: 18px;
       border: 4px solid #ff9f7d;
@@ -73,7 +74,7 @@ div#selector_crm {
       content: "";
       position: absolute;
       left: 2px;
-      top: 0px;
+      top: 2px;
       width: 18px;
       height: 18px;
       border: 2px solid #e0e0e0;
@@ -81,6 +82,7 @@ div#selector_crm {
       border-radius: 100%;
     }
 
+    /*
     input[type="radio"]:checked + label:after, 
     input[type="radio"]:not(:checked) + label:after {
       content: "";
@@ -97,12 +99,14 @@ div#selector_crm {
       border-radius: 100%;
       background-color: #f4f4f4;
     }
+    
     input[type="radio"]:not(:checked) + label:after {
       opacity: 0;
     }
     input[type="radio"]:checked + label:after {
       opacity: 1;
     }
+    */
 
     span {
       font-family: PT Sans, sans-serif;

@@ -40,7 +40,7 @@
       span Какой CRM системой вы пользуетесь?
     <SelectorCrm @crmSelected="onCrmSelected"/>
     <InputPromo v-if="showInputPromo" @inputValidChange="onPromoInputValidChange"/>
-    <ButtonRegistration :isActive="isButtonRegistrationActive" @regClick="onRegClick"/>
+    <ButtonRegistration :isActive="isButtonRegistrationActive" :caption="'Зарегистрироваться бесплатно'" @regClick="onRegClick"/>
     #already_have
       #prm_mujud(@click='toggleShowInputPromo')
         span У меня есть промокод
@@ -265,6 +265,7 @@ import InputPhone from './InputPhone.vue'
 import InputPromo from './InputPromo.vue'
 import ButtonRegistration from './ButtonRegistration.vue'
 import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   components: {
@@ -273,6 +274,12 @@ export default {
     InputPhone,
     InputPromo,
     ButtonRegistration
+  },
+  mounted() {
+    Analytics.setPageView('/Account/Register')
+    if(_.includes(window.location.path, 'from=invite')) {
+      Analytics.sendEvent('user', 'landing - from invite')
+    }
   },
   data() {
     return {
@@ -297,12 +304,15 @@ export default {
       window.location.href = '/oauth/Login'
     },
     onButtonMailMlrClick() {
+      Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
       document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&promocode=' + this.Promo
     },
     onButtonMailYndClick() {
+      Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
       document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
     },
     onButtonMailGmlClick() {
+      Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
       document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo
     },
     toggleShowInputPromo() {
@@ -340,6 +350,7 @@ export default {
           // eslint-disable-next-line
           console.log('response.then: ', response);
           if (response.data.is_success) {
+            Analytics.sendEvent('user', 'registrated', '')
             document.location.href = response.data.redirect_url;
           } else {
             TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')

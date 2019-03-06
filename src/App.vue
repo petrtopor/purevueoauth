@@ -3,6 +3,7 @@
     <Registration v-if="currentComponent === 'registration'"/>
     <Login v-if="currentComponent === 'login'"/>
     <AlreadyExists v-if="currentComponent === 'alreadyexists'"/>
+    <RegistrationComplete v-if="currentComponent === 'registrationcomplete'"/>
     <!-- <router-link to="/registration">Go to registration</router-link> -->
     <!-- <router-view></router-view> -->
   </div>
@@ -12,6 +13,7 @@
 import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'
 import AlreadyExists from './components/AlreadyExists'
+import RegistrationComplete from './components/RegistrationComplete'
 
 import _ from 'lodash'
 
@@ -20,7 +22,8 @@ export default {
   components: {
     Registration,
     Login,
-    AlreadyExists
+    AlreadyExists,
+    RegistrationComplete
   },
   data() {
     return {
@@ -28,6 +31,9 @@ export default {
     }
   },
   created() {
+    if(window.location.pathname.toLowerCase() === '/oauth/phonenumberforimportantnotificationsfromclients') {
+      this.currentComponent = 'registrationcomplete'
+    }
     if(_.includes(window.location.pathname.toLowerCase(), 'oauthcallback')) {
       this.currentComponent = 'alreadyexists'
     }

@@ -1,6 +1,6 @@
 <template lang="pug">
   #button_registration(v-bind:class="{ active: isActive }" @click="onClick")
-    span(@click="onClick") Зарегистрироваться бесплатно
+    span(@click="onClick") {{ caption || 'Зарегистрироваться бесплатно' }}
 </template>
 <style lang="less" scoped>
 div#button_registration {
@@ -45,7 +45,8 @@ div#button_registration {
 export default {
   name: 'ButtonRegistration',
   props: {
-    isActive: Boolean
+    isActive: Boolean,
+    caption: String
   },
   methods: {
     onClick() {

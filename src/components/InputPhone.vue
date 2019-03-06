@@ -5,7 +5,7 @@
       name="phone"
       class="form-control"
       v-model="inputText"
-      :mask="['(', /[1-9]/, /[1-9]/, /[1-9]/, ')', ' ', /[1-9]/, /[1-9]/, /[1-9]/, '-', /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/]"
+      :mask="[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/]"
       :guide="false"
       placeholderChar="_"
       @focus="onInputFocus"
@@ -175,14 +175,11 @@ export default {
       return this.isInputActive && this.inputText === ''
     },
     isValid() {
-      return /^\([0-9]{3}\) [0-9]{3}-[0-9]{4}$/.test(this.inputText)
+      // return /^[0-9]{9}$/.test(this.inputText) || /^[0-9]{13}$/.test(this.inputText)
+      return this.inputText.length < 14 && this.inputText.length > 8
     }
   },
   methods: {
-    fuck() {
-      // eslint-disable-next-line
-      console.log(this.$refs.input.$el)
-    },
     onSpanClick() {
       // this.$refs.input.focus()
       this.$refs.input.$el.focus()

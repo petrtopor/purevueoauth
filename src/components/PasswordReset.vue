@@ -22,6 +22,7 @@ export default {
     InputEmailPasswordReset
   },
   mounted() {
+    Analytics.sendEvent('user', 'reset password');
     this.container = this.$refs.container
     // console.log('PasswordReset::this.$refs.container: ', this.container)
     this.$nextTick(() => _.forEach(_.filter(this.container.parentNode.childNodes, childNode => childNode !== this.container), otherNode => {

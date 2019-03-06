@@ -1,7 +1,19 @@
 <template lang="pug">
   #input_email
     //- input(type="text" value="")
-    masked-input(
+    //- masked-input(
+    //-   type="text"
+    //-   name="email"
+    //-   class="form-control"
+    //-   v-model="inputText"
+    //-   :mask="emailMask"
+    //-   :guide="false"
+    //-   placeholderChar="_"
+    //-   @focus="onInputFocus"
+    //-   @blur="onInputBlur"
+    //-   @input="onInput"
+    //-   ref='input')
+    input(
       type="text"
       name="email"
       class="form-control"
