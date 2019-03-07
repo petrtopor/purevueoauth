@@ -125,6 +125,35 @@ export default {
     })
     */
     /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    END    */
+    const errorMessagesMap = {
+      '4011': 'Ошибка идентификации!',
+      '4041': 'Email не зарегистрирован в системе. Зарегистрируйтесь!',
+      '5301': 'Ошибка(',
+      '5303': 'Ошибка при регистрации.',
+      '5304': 'Ошибка авторизации.',
+      '5305': 'Не удалось привязать почту. Пожалуйста, привяжите почту самостоятельно после авторизации.',
+      '5306': 'Ошибка(',
+      '5307': 'Ошибка(',
+      '5308': 'Email уже зарегистрирован. Авторизуйтесь или зарегистрируйте новую почту!'
+    }
+    if(/error_message=([^&]+)/.exec(document.location.href) !== null) {
+      const error_message = /error_message=([^&]+)/.exec(document.location.href)[1]
+      if(error_message !== '') {
+        TMess.Error(errorMessagesMap[error_message])
+      }
+    }
+    if(/resetpassword=([^&]+)/.exec(document.location.href) !== null) {
+      const resetpassword = /resetpassword=([^&]+)/.exec(document.location.href)[1]
+      if(resetpassword !== '') {
+        this.showPasswordReset = true
+      }
+    }
+    if(/email=([^&]+)/.exec(document.location.href) !== null) {
+      const email = /email=([^&]+)/.exec(document.location.href)[1]
+      if(email !== '') {
+        this.email = email
+      }
+    }
   },
   methods: {
     onPasswordResetClose(container) {
@@ -147,13 +176,13 @@ export default {
       this.showPasswordReset = !this.showPasswordReset
     },
     mlrOauthLoginClick() {
-      window.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Authorization'
+      window.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Authorization&lang=ru'
     },
     yndOauthLoginClick() {
-      window.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Authorization'
+      window.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Authorization&lang=ru'
     },
     gmlOauthLoginClick() {
-      window.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Authorization'
+      window.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Authorization&lang=ru'
     },
     onInputValidChange(payload) {
       this.email = payload.value
@@ -163,6 +192,7 @@ export default {
       this.password = payload.value
     },
     onLoginClick() {
+      Preloader.start()
       console.log('onLoginClick()')
       var payload = 'Email=' + this.email + '&Password=' + this.password
       axios.post('/Account/LoginAsinc', payload).then(response => {

@@ -5,7 +5,7 @@
       name="phone"
       class="form-control"
       v-model="inputText"
-      :mask="[/[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/, /[1-9]/]"
+      :mask="[/[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/, /[0-9]/]"
       :guide="false"
       placeholderChar="_"
       @focus="onInputFocus"
@@ -126,7 +126,7 @@ div#input_phone {
       width: 166px;
       height: 19px;
       top: 16px;
-      left: 18px;
+      left: 6px;
       font-family: PT Sans;
       font-style: normal;
       font-weight: bold;
@@ -141,7 +141,8 @@ div#input_phone {
       width: 195px;
       height: 91px;
       top: 42px;
-      left: 18px;
+      left: 6px;
+      text-align: left;
       font-family: PT Sans;
       font-style: normal;
       font-weight: normal;

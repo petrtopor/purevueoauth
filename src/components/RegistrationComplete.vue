@@ -80,7 +80,7 @@ export default {
         .then(response => {
           if(response.data.status === true) {
             console.log('OK: ', response)
-            document.location.href = '/'
+            document.location.href = '/templates'
           } else {
             console.log('not-OK: ', response)
             TMess.Error('Не получилось... :(')

@@ -280,6 +280,23 @@ export default {
     if(_.includes(window.location.path, 'from=invite')) {
       Analytics.sendEvent('user', 'landing - from invite')
     }
+    const errorMessagesMap = {
+      '4011': 'Ошибка идентификации!',
+      '4041': 'Email не зарегистрирован в системе. Зарегистрируйтесь!',
+      '5301': 'Ошибка(',
+      '5303': 'Ошибка при регистрации.',
+      '5304': 'Ошибка авторизации.',
+      '5305': 'Не удалось привязать почту. Пожалуйста, привяжите почту самостоятельно после авторизации.',
+      '5306': 'Ошибка(',
+      '5307': 'Ошибка(',
+      '5308': 'Email уже зарегистрирован. Авторизуйтесь или зарегистрируйте новую почту!'
+    }
+    if(/error_message=([^&]+)/.exec(document.location.href) !== null) {
+      const error_message = /error_message=([^&]+)/.exec(document.location.href)[1]
+      if(error_message !== '') {
+        TMess.Error(errorMessagesMap[error_message])
+      }
+    }
   },
   data() {
     return {
@@ -305,7 +322,7 @@ export default {
     },
     onButtonMailMlrClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
-      document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&promocode=' + this.Promo
+      document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
     },
     onButtonMailYndClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
@@ -335,6 +352,7 @@ export default {
       this.CrmName = value
     },
     onRegClick() {
+      Preloader.start()
       axios
         // eslint-disable
         .post('/Account/PostRegister', {

@@ -1,19 +1,19 @@
 <template lang="pug">
   #selector_crm
     .option
-      input(type='radio' name='foo' value='amo' v-model='selected' @change="crmSelect" id="amo")
+      input(type='radio' name='foo' value='amoCRM' v-model='selected' @change="crmSelect" id="amo")
       //- span amoCRM
       label(for="amo") amoCRM
     .option
-      input(type='radio' name='foo' value='bitrix24' v-model='selected' @change="crmSelect" id="bitrix24")
+      input(type='radio' name='foo' value='Битрикс24' v-model='selected' @change="crmSelect" id="bitrix24")
       //- span Битрикс24
       label(for="bitrix24") Битрикс24
     .option
-      input(type='radio' name='foo' value='other' v-model='selected' @change="crmSelect" id="other")
+      input(type='radio' name='foo' value='Другой' v-model='selected' @change="crmSelect" id="other")
       //- span Другой
       label(for="other") Другой
     .option
-      input(type='radio' name='foo' value='none' v-model='selected' @change="crmSelect" id="none")
+      input(type='radio' name='foo' value='Никакой' v-model='selected' @change="crmSelect" id="none")
       //- span Нет CRM
       label(for="none") Нет CRM
 </template>
