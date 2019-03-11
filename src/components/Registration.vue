@@ -34,7 +34,7 @@
         </svg>
     #label_2
       span или зарегистрируйтесь, заполнив поля
-    <InputEmail @inputValidChange="onEmailInputValidChange"/>
+    <InputEmail @inputValidChange="onEmailInputValidChange" :initialText="RegEmail" v-if="showInputEmail"/>
     <InputPhone @inputValidChange="onPhoneInputValidChange"/>
     #label_3
       span Какой CRM системой вы пользуетесь?
@@ -276,9 +276,10 @@ export default {
     ButtonRegistration
   },
   mounted() {
-    Analytics.setPageView('/Account/Register')
+    console.log('mounted')
+    // Analytics.setPageView('/Account/Register')
     if(_.includes(window.location.path, 'from=invite')) {
-      Analytics.sendEvent('user', 'landing - from invite')
+      // Analytics.sendEvent('user', 'landing - from invite')
     }
     const errorMessagesMap = {
       '4011': 'Ошибка идентификации!',
@@ -297,9 +298,23 @@ export default {
         TMess.Error(errorMessagesMap[error_message])
       }
     }
+    if(/email=([^&]+)/.exec(document.location.href) !== null) {
+      const email = /email=([^&]+)/.exec(document.location.href)[1]
+      if(email !== '') {
+        console.log('email came from url: ', email)
+        // this.RegEmail = email
+        this.$nextTick(() => {
+          this.RegEmail = email
+          console.log('this.RegEmail: ', this.RegEmail)
+          this.$forceUpdate()
+          this.showInputEmail = true
+        })
+      }
+    }
   },
   data() {
     return {
+      showInputEmail: false,
       showInputPromo: false,
       isEmailInputValid: false,
       isPhoneInputValid: false,
@@ -322,15 +337,19 @@ export default {
     },
     onButtonMailMlrClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
-      document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
+      Preloader.start()
+      _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
     },
     onButtonMailYndClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
+      Preloader.start()
+      // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
       document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
     },
     onButtonMailGmlClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
-      document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo
+      Preloader.start()
+      _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
     },
     toggleShowInputPromo() {
       this.showInputPromo = !this.showInputPromo
@@ -369,14 +388,17 @@ export default {
           console.log('response.then: ', response);
           if (response.data.is_success) {
             Analytics.sendEvent('user', 'registrated', '')
-            document.location.href = response.data.redirect_url;
+            _.delay(() => document.location.href = response.data.redirect_url, 1000)
+            
           } else {
+            Preloader.stop()
             TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
           }
         })
         .catch(function(error) {
           // eslint-disable-next-line
           console.log('response.error: ', error);
+          Preloader.stop()
         })
     }
   }

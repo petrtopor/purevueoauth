@@ -94,9 +94,17 @@ export default {
   components: {
     MaskedInput
   },
+  props: {
+    initialText: String
+  },
+  mounted() {
+    if(this.initialText !== '') {
+      this.inputText = this.initialText
+    }
+    console.log('initialText received by InputEmail: ', this.initialText)
+  },
   data() {
     return {
-      testData: 'vagiz',
       selected: '',
       emailMask: emailMask,
       inputText: '',
@@ -122,9 +130,6 @@ export default {
       this.isInputActive = true
     },
     onInputBlur() {
-      if (this.inputText === '(') {
-        this.inputText = ''
-      }
       this.isInputActive = false
     },
     onInput: _.debounce(function() {

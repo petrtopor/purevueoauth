@@ -200,9 +200,14 @@ export default {
         if(response.data.auth) {
           console.log('response: ', response)
           window.location.href = response.data.redirect
+        } else {
+          Preloader.stop()
+          TMess.Error('Неверная пара логин/пароль')
+          console.log('response.data: ', response.data)
         }
       }).catch(error => {
         console.log('error: ', error)
+        Preloader.stop()
       })
     }
   }
