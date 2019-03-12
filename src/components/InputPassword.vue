@@ -8,7 +8,7 @@
       @blur="onInputBlur"
       @input="onInput"
       ref='input')
-    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите пароль
+    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") {{placeholder || 'Введите пароль'}}
 </template>
 
 <script>
@@ -16,6 +16,9 @@ import _ from 'lodash'
 
 export default {
   name: 'InputPassword',
+  props: {
+    placeholder: String
+  },
   data() {
     return {
       inputText: '',
@@ -41,7 +44,7 @@ export default {
       this.$emit('inputTextChange', {
         value: this.inputText
       })
-    }, 100)
+    }, 10)
   }
 }
 </script>

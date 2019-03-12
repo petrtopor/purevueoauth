@@ -60,6 +60,7 @@
         p Я не получал
         p или забыл пароль
     <PasswordReset v-if="showPasswordReset" @passwordReset="onPasswordReset" @close="onPasswordResetClose"/>
+    <NewPasswordCreation v-if="showNewPasswordCreation" @closeNewPasswordCreation="onCloseNewPasswordCreation"/>
 </template>
 
 <script>
@@ -67,6 +68,7 @@ import InputEmailLogin from './InputEmailLogin.vue'
 import InputPassword from './InputPassword.vue'
 import ButtonLogin from './ButtonLogin.vue'
 import PasswordReset from './PasswordReset.vue'
+import NewPasswordCreation from './NewPasswordCreation.vue'
 
 import axios from 'axios'
 
@@ -75,10 +77,12 @@ export default {
     InputEmailLogin,
     InputPassword,
     ButtonLogin,
-    PasswordReset
+    PasswordReset,
+    NewPasswordCreation
   },
   data() {
     return {
+      showNewPasswordCreation: false,
       email: '',
       isEmailValid: false,
       password: '',
@@ -91,40 +95,6 @@ export default {
     }
   },
   mounted() {
-    /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    BEGIN    */
-    /*
-    var initialX = 0
-    var initialY = 0
-    var offsetX = 0
-    var offsetY = 0
-    var currentX = 0
-    var currentY = 0
-    var isActive = false
-    const container = this.$refs.container
-    container.addEventListener('mousedown', event => {
-      if(event.target.id === 'container') {
-        isActive = true
-        initialX = event.clientX - offsetX;
-        initialY = event.clientY - offsetY;
-      } else {
-        console.log('target wrong, target is: ', event.target)
-      }
-    })
-    container.addEventListener('mousemove', event => {
-      if(isActive === true) {
-        event.preventDefault()
-        currentX = event.clientX - initialX;
-        currentY = event.clientY - initialY;
-        offsetX = currentX;
-        offsetY = currentY;
-        event.target.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)"
-      }
-    })
-    container.addEventListener('mouseup', event => {
-      isActive = false
-    })
-    */
-    /* MAKE TRANSLATION DUE TO DRAGGING POSSIBLE    - - - - - - - -    END    */
     const errorMessagesMap = {
       '4011': 'Ошибка идентификации!',
       '4041': 'Email не зарегистрирован в системе. Зарегистрируйтесь!',
@@ -156,6 +126,9 @@ export default {
     }
   },
   methods: {
+    onCloseNewPasswordCreation() {
+      this.showNewPasswordCreation = false
+    },
     onPasswordResetClose(container) {
       _.forEach(_.filter(container.parentNode.childNodes, childNode => childNode !== container), otherNode => {
         otherNode.style.filter = ''
@@ -168,6 +141,7 @@ export default {
       this.showPasswordReset = false
       if(response.data.state) {
         window.TMess.Success('Письмо для восстановления пароля отправлено на указанный Вами email')
+        showNewPasswordCreation = true
       } else {
         window.TMess.Error(response.data.error)
       }

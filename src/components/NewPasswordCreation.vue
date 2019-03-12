@@ -4,62 +4,48 @@
       .cross_part(@click="onCloseClick")
       .cross_part(@click="onCloseClick")
     #caption
-      span Восстановление пароля
-    <InputEmailPasswordReset @inputValidChange='onEmailChange'/>
-    #button(@click="onButtonClick" :class="{active: buttonActive}")
+      span Создание нового пароля
+    <InputPassword :placeholder="'Введите новый пароль'" @inputTextChange="onFirstPasswordInput"/>
+    <InputPassword :placeholder="'Повторите новый пароль'" @inputTextChange="onSecondPasswordInput"/>
+    #button(@click="onButtonClick" :class="{active: isButtonActive}")
       span(@click="onButtonClick") Продолжить
 </template>
 
 <script>
-import InputEmailPasswordReset from './InputEmailPasswordReset.vue'
-import axios from 'axios'
-import _ from 'lodash'
+import InputPassword from './InputPassword.vue'
 export default {
-  name: 'PasswordReset',
   components: {
-    InputEmailPasswordReset
+    InputPassword
   },
-  mounted() {
-    Analytics.sendEvent('user', 'reset password');
-    this.container = this.$refs.container
-    // console.log('PasswordReset::this.$refs.container: ', this.container)
-    this.$nextTick(() => _.forEach(_.filter(this.container.parentNode.childNodes, childNode => childNode !== this.container), otherNode => {
-      otherNode.style.filter = 'blur(2px)'
-      otherNode.style['pointer-events'] = 'none'
-      otherNode.style['user-select'] = 'none'
-    }))
-  },
-  beforeDestroy() {
-    // const container = this.$refs.container
-    // _.forEach(_.filter(container.parentNode.childNodes, childNode => childNode !== container), otherNode => otherNode.style.filter = '')
-  },
+  name: 'NewPasswordCreation',
   data() {
     return {
-      email: '',
-      container: null,
-      buttonActive: false
+      password1: '',
+      password2: '',
     }
   },
   methods: {
-    onCloseClick() {
-      this.$emit('close', this.container)
+    onFirstPasswordInput(payload) {
+      this.password1 = payload['value']
     },
-    onEmailChange(payload) {
-      this.email = payload.value
-      this.buttonActive = payload['isValid']
+    onSecondPasswordInput(payload) {
+      this.password2 = payload['value']
+    },
+    onCloseClick() {
+      console.log('onCloseClick')
+      this.$emit('closeNewPasswordCreation')
     },
     onButtonClick() {
-      const payload = {
-        model: {
-          Email: this.email
-        }
+      if(this.isButtonActive) {
+        //
+      } else {
+        //
       }
-      axios.post('/Account/PostResetPassword', payload).then(response => {
-        this.$emit('close', this.container)
-        this.$emit('passwordReset', response)
-      }).catch(error => {
-        console.log('error: ', error)
-      })
+    }
+  },
+  computed: {
+    isButtonActive() {
+      return (this.password1 === this.password2) && (this.password1 !== '')
     }
   }
 }
@@ -108,18 +94,18 @@ div#container {
 		display: flex;
 		justify-content: center;
     height: 32px;
+    // width: fit-content;
     width: 100%;
 
 		span {
 			/* Восстановление пароля */
       // width: 357px;
       width: fit-content;
-			height: 32px;
 			font-family: PT Sans;
 			font-style: normal;
 			font-weight: bold;
 			line-height: normal;
-			font-size: 18px;
+			font-size: 24px;
 			text-align: center;
 			color: #545454;
 		}

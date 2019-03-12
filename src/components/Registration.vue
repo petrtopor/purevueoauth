@@ -38,7 +38,7 @@
     <InputPhone @inputValidChange="onPhoneInputValidChange"/>
     #label_3
       span Какой CRM системой вы пользуетесь?
-    <SelectorCrm @crmSelected="onCrmSelected"/>
+    <SelectorCrm @crmSelected="onCrmSelected" :isHighlighted="isCrmSelectorHighlighted"/>
     <InputPromo v-if="showInputPromo" @inputValidChange="onPromoInputValidChange"/>
     <ButtonRegistration :isActive="isButtonRegistrationActive" :caption="'Зарегистрироваться бесплатно'" @regClick="onRegClick"/>
     #already_have
@@ -310,10 +310,16 @@ export default {
           this.showInputEmail = true
         })
       }
+    } else {
+      this.$nextTick(() => {
+        this.RegEmail = ''
+        this.showInputEmail = true
+      })
     }
   },
   data() {
     return {
+      isCrmSelectorHighlighted: false,
       showInputEmail: false,
       showInputPromo: false,
       isEmailInputValid: false,
@@ -321,7 +327,7 @@ export default {
       isPromoInputValid: false,
       RegEmail: '',
       RegPhone: '',
-      CrmName: 'none',
+      CrmName: '',
       Promo: '',
       Language: ''
     }
@@ -343,8 +349,8 @@ export default {
     onButtonMailYndClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
       Preloader.start()
-      // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
-      document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
+      _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
+      // document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
     },
     onButtonMailGmlClick() {
       Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
@@ -371,7 +377,46 @@ export default {
       this.CrmName = value
     },
     onRegClick() {
-      Preloader.start()
+      if(this.CrmName === '') {
+        TMess.Error('Не забудьте выбрать тип CRM!')
+        this.isCrmSelectorHighlighted = true
+        _.delay(() => {
+          this.isCrmSelectorHighlighted = false
+        }, 2000)
+      } else {
+        Preloader.start()
+        axios
+          .post('/Account/PostRegister', {
+            model: {
+              RegEmail: this.RegEmail,
+              RegPhone: this.RegPhone,
+              CrmName: this.CrmName,
+              Promo: this.Promo,
+              Language: 'ru'
+            }
+          })
+          .then(function(response) {
+            // eslint-disable-next-line
+            console.log('response.then: ', response);
+            if (response.data.is_success) {
+              Analytics.sendEvent('user', 'registrated', '')
+              _.delay(() => document.location.href = response.data.redirect_url, 1000)
+              
+            } else {
+              Preloader.stop()
+              TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
+            }
+          })
+          .catch(function(error) {
+            // eslint-disable-next-line
+            console.log('response.error: ', error);
+            Preloader.stop()
+          })
+      }
+      
+      // this.$nextTick(() => _.delay(() => this.isCrmSelectorHighlighted = false), 2000)
+      // Preloader.start()
+      /*
       axios
         // eslint-disable
         .post('/Account/PostRegister', {
@@ -400,6 +445,7 @@ export default {
           console.log('response.error: ', error);
           Preloader.stop()
         })
+      */
     }
   }
 }
