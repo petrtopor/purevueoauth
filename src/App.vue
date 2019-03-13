@@ -4,6 +4,7 @@
     <Login v-if="currentComponent === 'login'"/>
     <AlreadyExists v-if="currentComponent === 'alreadyexists'"/>
     <RegistrationComplete v-if="currentComponent === 'registrationcomplete'"/>
+    <PasswordRecovery v-if="currentComponent === 'passwordrecovery'"/>
     <!-- <router-link to="/registration">Go to registration</router-link> -->
     <!-- <router-view></router-view> -->
   </div>
@@ -14,6 +15,7 @@ import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'
 import AlreadyExists from './components/AlreadyExists'
 import RegistrationComplete from './components/RegistrationComplete'
+import PasswordRecovery from './components/PasswordRecovery'
 
 import _ from 'lodash'
 
@@ -23,7 +25,8 @@ export default {
     Registration,
     Login,
     AlreadyExists,
-    RegistrationComplete
+    RegistrationComplete,
+    PasswordRecovery
   },
   data() {
     return {
@@ -31,6 +34,9 @@ export default {
     }
   },
   created() {
+    if(window.location.pathname.toLowerCase() === '/oauth/passwordrecovery') {
+      this.currentComponent = 'passwordrecovery'
+    }
     if(window.location.pathname.toLowerCase() === '/oauth/phonenumberforimportantnotificationsfromclients') {
       this.currentComponent = 'registrationcomplete'
     }
@@ -52,6 +58,10 @@ export default {
 <style lang="less">
 // @import url('https://fonts.googleapis.com/css?family=PT Sans');
 #app {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100vh;
   // font-family: 'PT Sans', 'Avenir', Helvetica, Arial, sans-serif;
   font-family: 'PT Sans';
   -webkit-font-smoothing: antialiased;

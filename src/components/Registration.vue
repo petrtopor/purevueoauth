@@ -277,9 +277,9 @@ export default {
   },
   mounted() {
     console.log('mounted')
-    // Analytics.setPageView('/Account/Register')
+    Analytics.setPageView('/Account/Register')
     if(_.includes(window.location.path, 'from=invite')) {
-      // Analytics.sendEvent('user', 'landing - from invite')
+      Analytics.sendEvent('user', 'landing - from invite')
     }
     const errorMessagesMap = {
       '4011': 'Ошибка идентификации!',

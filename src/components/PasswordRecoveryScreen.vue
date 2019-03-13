@@ -130,7 +130,7 @@ export default {
       this.showNewPasswordCreation = false
     },
     onPasswordResetClose(container) {
-      _.forEach(_.filter(container.parentNode.childNodes, childNode => (childNode !== container) && (childNode.nodeType !== 8)), otherNode => {
+      _.forEach(_.filter(container.parentNode.childNodes, childNode => childNode !== container), otherNode => {
         otherNode.style.filter = ''
         otherNode.style['pointer-events'] = ''
         otherNode.style['user-select'] = ''
@@ -141,7 +141,7 @@ export default {
       this.showPasswordReset = false
       if(response.data.state) {
         window.TMess.Success('Письмо для восстановления пароля отправлено на указанный Вами email')
-        // this.showNewPasswordCreation = true
+        showNewPasswordCreation = true
       } else {
         window.TMess.Error(response.data.error)
       }

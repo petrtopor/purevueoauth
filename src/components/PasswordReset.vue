@@ -22,12 +22,22 @@ export default {
   mounted() {
     Analytics.sendEvent('user', 'reset password');
     this.container = this.$refs.container
+    // console.log('elements to blur:\n')
+    // _.forEach(_.filter(this.$refs.container.parentNode.childNodes, chN => chN !== this.$refs.container), elToBlur => console.log(elToBlur))
+    _.forEach(_.filter(this.$refs.container.parentNode.childNodes, chN => (chN !== this.$refs.container) && (chN.nodeType !== 8)), elToBlur => {
+      // console.log('elToBlur: ', elToBlur, 'type: ', elToBlur.nodeType)
+      elToBlur.style['filter'] = 'blur(2px)'
+      elToBlur.style['pointer-events'] = 'none'
+      elToBlur.style['user-select'] = 'none'
+    })
     // console.log('PasswordReset::this.$refs.container: ', this.container)
+    /*
     this.$nextTick(() => _.forEach(_.filter(this.container.parentNode.childNodes, childNode => childNode !== this.container), otherNode => {
-      otherNode.style.filter = 'blur(2px)'
+      otherNode.style['filter'] = 'blur(2px)'
       otherNode.style['pointer-events'] = 'none'
       otherNode.style['user-select'] = 'none'
     }))
+    */
   },
   beforeDestroy() {
     // const container = this.$refs.container
