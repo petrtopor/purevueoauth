@@ -48,7 +48,10 @@
         span Уже есть аккаунт?&nbsp;
         span.link(@click="onAccMujudClick") Войти
     #disclaimer
-      span Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете<br>наши политику конфиденциальности и договор оферты
+      span Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете<br>наши
+      a(href="https://blog.b2bfamily.com/confidencepolicy") политику конфиденциальности
+      span и
+      a(href="https://b2bfamily.com/Home/license") договор оферты
 </template>
 <style lang="less" scoped>
 // @import url('https://fonts.googleapis.com/css?family=PT+Sans');
@@ -208,6 +211,10 @@ div#container {
         font-size: 14px;
         color: #636363;
         cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
@@ -254,6 +261,15 @@ div#container {
       text-align: center;
       color: #ababab;
     }
+    a {
+      font-family: 'PT Sans', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      line-height: normal;
+      font-size: 14px;
+      text-align: center;
+      color: #ababab;
+    }
   }
 }
 </style>
@@ -277,9 +293,12 @@ export default {
   },
   mounted() {
     console.log('mounted')
-    Analytics.setPageView('/Account/Register')
+    // Analytics.setPageView('/Account/Register')
     if(_.includes(window.location.path, 'from=invite')) {
-      Analytics.sendEvent('user', 'landing - from invite')
+      // Analytics.sendEvent('user', 'landing - from invite')
+      Analytics.sendEvent("user", "landing - from invite", "", "", () => {
+        console.log('Analytics has been sent')
+      })
     }
     const errorMessagesMap = {
       '4011': 'Ошибка идентификации!',
@@ -342,20 +361,32 @@ export default {
       window.location.href = '/oauth/Login'
     },
     onButtonMailMlrClick() {
-      Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
-      Preloader.start()
-      _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
+      // Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
+      // Preloader.start()
+      Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
+        console.log('ga has been sent')
+        document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
+      })
+      // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
     },
     onButtonMailYndClick() {
-      Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
-      Preloader.start()
-      _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
+      // Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
+      // Preloader.start()
+      Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
+        console.log('ga has been sent')
+        document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
+      })
+      // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
       // document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
     },
     onButtonMailGmlClick() {
-      Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
-      Preloader.start()
-      _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
+      // Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
+      // Preloader.start()
+      Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
+        console.log('ga has been sent')
+        document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
+      })
+      // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
     },
     toggleShowInputPromo() {
       this.showInputPromo = !this.showInputPromo
@@ -397,11 +428,14 @@ export default {
           })
           .then(function(response) {
             // eslint-disable-next-line
-            console.log('response.then: ', response);
+            // console.log('response.then: ', response);
             if (response.data.is_success) {
-              Analytics.sendEvent('user', 'registrated', '')
-              _.delay(() => document.location.href = response.data.redirect_url, 1000)
-              
+              new Promise((resolve, reject) => {
+                Analytics.sendEvent("user", "registrated", "", "", () => resolve(true))
+                _.delay(() => reject(false), 10000)
+              })
+              .then(() => document.location.href = response.data.redirect_url)
+              .catch(() => document.location.href = response.data.redirect_url)
             } else {
               Preloader.stop()
               TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
@@ -413,39 +447,6 @@ export default {
             Preloader.stop()
           })
       }
-      
-      // this.$nextTick(() => _.delay(() => this.isCrmSelectorHighlighted = false), 2000)
-      // Preloader.start()
-      /*
-      axios
-        // eslint-disable
-        .post('/Account/PostRegister', {
-          model: {
-            RegEmail: this.RegEmail,
-            RegPhone: this.RegPhone,
-            CrmName: this.CrmName,
-            Promo: this.Promo,
-            Language: 'ru'
-          }
-        })
-        .then(function(response) {
-          // eslint-disable-next-line
-          console.log('response.then: ', response);
-          if (response.data.is_success) {
-            Analytics.sendEvent('user', 'registrated', '')
-            _.delay(() => document.location.href = response.data.redirect_url, 1000)
-            
-          } else {
-            Preloader.stop()
-            TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
-          }
-        })
-        .catch(function(error) {
-          // eslint-disable-next-line
-          console.log('response.error: ', error);
-          Preloader.stop()
-        })
-      */
     }
   }
 }

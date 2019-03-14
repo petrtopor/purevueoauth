@@ -35,7 +35,21 @@ export default {
     InputPromo
   },
   mounted() {
-    Analytics.sendEvent('user', 'registrated', 'oauth')
+		// Analytics.sendEvent('user', 'registrated', 'oauth')
+		Analytics.sendEvent("user", "registrated - from invite", "oauth", "", () => {
+			console.log('Analytics has been sent')
+			// return Promise.resolve('ga')
+		})
+		// _.delay(() => Promise.resolve('noga'), 10000)
+		/*
+		Promice.race([
+			Analytics.sendEvent("user", "registrated - from invite", "oauth", "", () => {
+				console.log('Analytics has been sent')
+				return Promise.resolve(true)
+			}),
+			_.delay(() => Promise.resolve(false), 10000)
+		]).then(isGaSent => )
+		*/
   },
   data() {
     return {
