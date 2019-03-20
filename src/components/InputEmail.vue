@@ -1,27 +1,15 @@
 <template lang="pug">
-  #input_email
-    //- input(type='text')
-    //- masked-input(
-    //-   type="text"
-    //-   name="email"
-    //-   class="form-control"
-    //-   v-model="inputText"
-    //-   :mask="emailMask"
-    //-   :guide="false"
-    //-   placeholderChar="_"
-    //-   @focus="onInputFocus"
-    //-   @blur="onInputBlur"
-    //-   @input="onInput"
-    //-   ref='input')
+  #input_email(@click="onSpanClick")
     input(
       type="text"
       name="email"
       v-model="inputText"
+      @keyup.enter="onEnterPressed"
       @focus="onInputFocus"
       @blur="onInputBlur"
       @input="onInput"
       ref='input')
-    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите почту, с которой отправляете письма
+    span(v-bind:class="{ aside: isSpanAside }") Введите почту, с которой отправляете письма
 </template>
 
 <style lang="less" scoped>
@@ -122,6 +110,9 @@ export default {
     }
   },
   methods: {
+    onEnterPressed() {
+      console.log('ENTER button pressed in InputEmail field')
+    },
     onSpanClick() {
       // this.$refs.input.$el.focus()
       this.$refs.input.focus()

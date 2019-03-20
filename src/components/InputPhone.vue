@@ -1,5 +1,5 @@
 <template lang="pug">
-  #input_phone
+  #input_phone(@click="onSpanClick")
     masked-input(
       type="text"
       name="phone"
@@ -13,7 +13,8 @@
       @input="onInput"
       ref='input')
     //- input(type='text' ref='input' @focus="onInputFocus" @blur="onInputBlur" v-model="inputText")
-    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите ваш телефон
+    //- span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите ваш телефон
+    span(v-bind:class="{ aside: isSpanAside }") Введите ваш телефон
     .hint_phone(v-if="showHintPhone")
       .triangle
       #hider

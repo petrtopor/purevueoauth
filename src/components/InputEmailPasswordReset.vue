@@ -1,5 +1,5 @@
 <template lang="pug">
-  #input_email
+  #input_email(@click="onSpanClick")
     //- input(type="text" value="")
     //- masked-input(
     //-   type="text"
@@ -25,7 +25,7 @@
       @blur="onInputBlur"
       @input="onInput"
       ref='input')
-    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите ваш e-mail
+    span(v-bind:class="{ aside: isSpanAside }") Введите ваш e-mail
 </template>
 
 <script>
@@ -58,7 +58,8 @@ export default {
   },
   methods: {
     onSpanClick() {
-      this.$refs.input.$el.focus()
+      // console.log('onSpanClick: this.$refs.input: ', this.$refs.input)
+      this.$refs.input.focus()
     },
     onInputFocus() {
       this.isInputActive = true

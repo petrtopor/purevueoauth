@@ -1,5 +1,5 @@
 <template lang="pug">
-  #input_password
+  #input_password(@click="onSpanClick")
     input(
       type="password"
       value=""
@@ -8,7 +8,7 @@
       @blur="onInputBlur"
       @input="onInput"
       ref='input')
-    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") {{placeholder || 'Введите пароль'}}
+    span(v-bind:class="{ aside: isSpanAside }") {{placeholder || 'Введите пароль'}}
 </template>
 
 <script>

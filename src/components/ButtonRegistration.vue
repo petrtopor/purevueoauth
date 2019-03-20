@@ -1,13 +1,14 @@
 <template lang="pug">
   #button_registration(v-bind:class="{ active: isActive }" @click="onClick")
-    span(@click="onClick") {{ caption || 'Зарегистрироваться бесплатно' }}
+    span {{ caption || 'Зарегистрироваться бесплатно' }}
 </template>
 <style lang="less" scoped>
 div#button_registration {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 60px;
+  min-height: 60px;
+  // padding: 18px 0px;
   margin-top: 24px;
   background: linear-gradient(
       125.63deg,
@@ -23,7 +24,8 @@ div#button_registration {
     font-family: 'PT Sans', sans-serif;
     font-style: normal;
     font-weight: bold;
-    line-height: normal;
+    // line-height: normal;
+    line-height: 24px;
     font-size: 18px;
     color: #ffffff;
     cursor: default;
@@ -49,13 +51,13 @@ export default {
     caption: String
   },
   methods: {
-    onClick() {
-      // eslint-disable-next-line
+    onClick: _.debounce(function() {
       console.log('ButtonRegistration pressed')
       if (this.isActive) {
+        console.log('regClick emitted')
         this.$emit('regClick')
       }
-    }
+    }, 100)
   }
 }
 </script>

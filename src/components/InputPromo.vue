@@ -1,7 +1,7 @@
 <template lang="pug">
-  #input_promo
+  #input_promo(@click="onSpanClick")
     input(type='text' ref="input" @focus="onInputFocus" @blur="onInputBlur" @input="onInput" v-model="inputText")
-    span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick" ref="span") Введите промокод
+    span(v-bind:class="{ aside: isSpanAside }" ref="span") Введите промокод
     .error(v-if="showError")
       .triangle
       span Промокода не существует

@@ -48,10 +48,10 @@
         span Уже есть аккаунт?&nbsp;
         span.link(@click="onAccMujudClick") Войти
     #disclaimer
-      span Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете<br>наши
-      a(href="https://blog.b2bfamily.com/confidencepolicy") политику конфиденциальности
-      span и
-      a(href="https://b2bfamily.com/Home/license") договор оферты
+      span Нажимая кнопку «Зарегистрироваться бесплатно», вы принимаете<br>наши 
+      a(href="https://blog.b2bfamily.com/confidencepolicy" target="_blank") политику конфиденциальности 
+      span и 
+      a(href="https://b2bfamily.com/Home/license" target="_blank") договор оферты
 </template>
 <style lang="less" scoped>
 // @import url('https://fonts.googleapis.com/css?family=PT+Sans');
@@ -69,8 +69,10 @@ div#container {
 
     span {
       /* Зарегистрируйтесь и закрывайте еще больше сделок */
-      width: 357px;
+      // width: 357px;
+      width: 100%;
       height: 63px;
+      user-select: none;
       // font-family: 'PT Sans', sans-serif;
       font-family: 'PT Sans', sans-serif;
       font-style: normal;
@@ -115,7 +117,7 @@ div#container {
     justify-content: space-between;
     padding-left: 12px;
     padding-right: 12px;
-    height: 96px;
+    min-height: 96px;
     padding-top: 24px;
     margin-top: -10px;
     margin-bottom: -10px;
@@ -246,7 +248,7 @@ div#container {
   }
 
   div#disclaimer {
-    display: flex;
+    // display: flex;
     justify-content: space-around;
     height: 37px;
     margin-top: 23px;
@@ -258,7 +260,7 @@ div#container {
       font-weight: normal;
       line-height: normal;
       font-size: 14px;
-      text-align: center;
+      // text-align: center;
       color: #ababab;
     }
     a {
@@ -267,7 +269,8 @@ div#container {
       font-weight: normal;
       line-height: normal;
       font-size: 14px;
-      text-align: center;
+      text-decoration: underline;
+      // text-align: center;
       color: #ababab;
     }
   }
@@ -293,7 +296,8 @@ export default {
   },
   mounted() {
     console.log('mounted')
-    // Analytics.setPageView('/Account/Register')
+    Analytics.setPageView('/Account/Register')
+    Analytics.pageView("/Account/Register")
     if(_.includes(window.location.path, 'from=invite')) {
       // Analytics.sendEvent('user', 'landing - from invite')
       Analytics.sendEvent("user", "landing - from invite", "", "", () => {
@@ -431,7 +435,7 @@ export default {
             // console.log('response.then: ', response);
             if (response.data.is_success) {
               new Promise((resolve, reject) => {
-                Analytics.sendEvent("user", "registrated", "", "", () => resolve(true))
+                Analytics.sendEvent("user", "registrated", "direct", "", () => resolve(true))
                 _.delay(() => reject(false), 10000)
               })
               .then(() => document.location.href = response.data.redirect_url)

@@ -5,7 +5,7 @@
     <InputPassword :placeholder="'Введите новый пароль'" @inputTextChange="onFirstPasswordInput"/>
     <InputPassword :placeholder="'Повторите новый пароль'" @inputTextChange="onSecondPasswordInput"/>
     #button(@click="onButtonClick" :class="{active: isButtonActive}")
-      span(@click="onButtonClick") Продолжить
+      span Продолжить
 </template>
 
 <script>
@@ -68,11 +68,12 @@ export default {
       this.password2 = payload['value']
     },
     onCloseClick() {
-      console.log('onCloseClick')
+      // console.log('onCloseClick')
       this.$emit('closeNewPasswordCreation')
     },
     onButtonClick() {
       if(this.isButtonActive) {
+        Preloader.start()
         const payload = {
           model: {
             Token: this.token,
@@ -81,20 +82,20 @@ export default {
           }
         }
         axios.post('/Account/ResetPasswordActivateAsync', payload).then(response => {
-          console.log('response.data.is_success', response.data.is_success)
+          Preloader.stop()
+          // console.log('response.data.is_success', response.data.is_success)
           if(response.data.is_success) {
-            console.log('response.data.is_success === true')
+            // console.log('response.data.is_success === true')
             window.location.href='/'
           } else {
-            console.log('response.data.is_success === false')
-            console.log('response.data.error: ', response.data.error)
+            // console.log('response.data.is_success === false')
+            // console.log('response.data.error: ', response.data.error)
             TMess.Error(errorMessagesMap[response.data.error])
           }
         }).catch(error => {
-          console.log('error: ', error)
+          TMess.Error(error)
+          // console.log('error: ', error)
         })
-      } else {
-        //
       }
     }
   }
