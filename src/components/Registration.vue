@@ -58,7 +58,12 @@
 div#container {
   display: flex;
   flex-direction: column;
-  width: 468px;
+  @media screen and (min-width: 470px) {
+    width: 468px;
+  }
+  @media screen and (max-width: 469px) {
+    width: 320px;
+  }
   background-color: #f5f5f5;
   margin-top: 84px;
 
