@@ -18,6 +18,10 @@ div#button_registration {
     #ffffff;
   box-shadow: 0px 5px 12px rgba(179, 83, 83, 0.07);
   border-radius: 4px;
+  @media screen and (max-width: 469px) {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 
   span {
     /* Зарегистрироваться бесплатно */

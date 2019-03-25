@@ -61,10 +61,18 @@ div#selector_crm {
     // box-shadow: 0 0 16px 8px #ff9f7dff;
     transition: box-shadow 2000ms;
     box-sizing: content-box;
+    @media screen and (max-width: 469px) {
+      flex-wrap: wrap;
+      height: fit-content;
+    }
 
     div.option {
       display: flex;
       align-items: center;
+      @media screen and (max-width: 469px) {
+        width: 45%;
+        margin: 4px;
+      }
 
       input[type="radio"]:checked, 
       input[type="radio"]:not(:checked) {
@@ -119,6 +127,9 @@ div#selector_crm {
         font-size: 14px;
         color: #636363;
         margin-left: 10px;
+        @media screen and (max-width: 469px) {
+          font-size: 12px;
+        }
       }
     }
   }

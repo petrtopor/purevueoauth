@@ -37,6 +37,11 @@ div#input_phone {
   box-sizing: border-box;
   border-radius: 4px;
   padding-left: 18px;
+  @media screen and (max-width: 469px) {
+    width: 300px;
+    padding-left: 8px;
+    margin-left: 6px;
+  }
 
   input {
     width: 468px;
@@ -54,6 +59,10 @@ div#input_phone {
     box-shadow: none;
     margin-top: 20px;
     padding-left: 0px!important;
+    @media screen and (max-width: 469px) {
+      width: 280px;
+      margin-top: 8px;
+    }
   }
 
   span {
@@ -72,11 +81,20 @@ div#input_phone {
     transition-timing-function: ease-in-out;
     transition-duration: 0.3s;
 
+    @media screen and (max-width: 469px) {
+      left: 6px;
+      font-size: 14px;
+    }
+
     &.aside {
       /* Введите промокод */
       font-size: 13px;
       height: 17px;
       top: 8px;
+      @media screen and (max-width: 469px) {
+        top: 1px;
+        font-size: 12px;
+      }
     }
   }
 

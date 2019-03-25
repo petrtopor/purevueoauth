@@ -58,11 +58,12 @@
 div#container {
   display: flex;
   flex-direction: column;
-  @media screen and (min-width: 470px) {
-    width: 468px;
-  }
+  // @media screen and (min-width: 470px) {
+  //   width: 468px;
+  // }
   @media screen and (max-width: 469px) {
     width: 320px;
+    margin-top: 0px;
   }
   background-color: #f5f5f5;
   margin-top: 84px;
@@ -86,6 +87,9 @@ div#container {
       font-size: 24px;
       text-align: center;
       color: #545454;
+      @media screen and (max-width: 469px) {
+        font-size: 16px;
+      }
     }
   }
 
@@ -130,6 +134,11 @@ div#container {
     border-radius: 4px;
     box-sizing: border-box;
 
+    @media screen and (max-width: 469px) {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
     div.button_mail {
       display: flex;
       justify-content: space-around;
@@ -137,6 +146,10 @@ div#container {
       height: 48px;
       width: 138px;
       border-radius: 4px;
+      @media screen and (max-width: 469px) {
+        width: 90px;
+        height: 40px;
+      }
 
       &:hover {
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
@@ -383,7 +396,7 @@ export default {
       // Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
         console.log('ga has been sent')
-        document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
+        document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
       })
       // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
       // document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
@@ -393,7 +406,7 @@ export default {
       // Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
         console.log('ga has been sent')
-        document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
+        document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo
       })
       // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
     },

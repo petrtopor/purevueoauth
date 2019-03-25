@@ -32,15 +32,9 @@
         </svg>
     #label_1
       .line
-        <svg width="206" height="1" viewBox="0 0 206 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="206" y1="0.5" y2="0.5" stroke="#E0E0E0" />
-        </svg>
       .label_text
         span или
       .line
-        <svg width="214" height="1" viewBox="0 0 214 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="214" y1="0.5" y2="0.5" stroke="#E0E0E0" />
-        </svg>
     //- #input_email
     //-   input(type="text" value="")
     //-   span Введите ваш e-mail
@@ -196,6 +190,11 @@ div#container {
 	background-color: #F5F5F5;
 	margin-top: 84px;
 
+	@media screen and (max-width: 469px) {
+		width: 320px;
+		margin-top: 0px;
+  }
+
 	div#caption {
 		display: flex;
 		justify-content: center;
@@ -212,21 +211,36 @@ div#container {
 			font-size: 24px;
 			text-align: center;
 			color: #545454;
+
+			@media screen and (max-width: 469px) {
+				font-size: 16px;
+				width: fit-content;
+      }
 		}
 	}
 
 	div#label_1 {
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
+		// justify-content: space-between;
 		align-items: center;
 		margin-top: 14px;
 
 		div.line {
-			padding-bottom: 5px;
+			// padding-bottom: 5px;
+			flex-grow: 1;
+			// border-bottom: 1px solid black;
+			height: 1px;
+			background-color: #e0e0e0;
 		}
 
 		div.label_text {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			padding-bottom: 3px;
+			// height: fit-content;
+			
 			span {
 				font-family: 'PT Sans', sans-serif;
 				font-style: normal;
@@ -247,6 +261,11 @@ div#container {
 		margin-top: 32px;
 		box-sizing: border-box;
 
+		@media screen and (max-width: 469px) {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
 		div.button_mail {
 			display: flex;
 			justify-content: space-around;
@@ -259,14 +278,19 @@ div#container {
 			box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.07);
 			border-radius: 4px;
 
+			@media screen and (max-width: 469px) {
+        width: 90px;
+        height: 40px;
+      }
+
 			&:hover {
 				box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
 				cursor: pointer;
 			}
 
-			&.ynd {
-				width: 146px !important;
-			}
+			// &.ynd {
+			// 	width: 146px !important;
+			// }
 		}
 	}
 
@@ -290,150 +314,150 @@ div#container {
 		}
 	}
 
-	div#input_email {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		// height: 44px;
-		height: 58px;
-		width: 468px;
-		margin-top: 27px;
-		position: relative;
-		// height: 64px;
-		background: #FFFFFF;
-		border: 1px solid #E0E0E0;
-		box-sizing: border-box;
-		border-radius: 4px;
-		padding-left: 18px;
+	// div#input_email {
+	// 	display: flex;
+	// 	flex-direction: row;
+	// 	align-items: center;
+	// 	// height: 44px;
+	// 	height: 58px;
+	// 	width: 468px;
+	// 	margin-top: 27px;
+	// 	position: relative;
+	// 	// height: 64px;
+	// 	background: #FFFFFF;
+	// 	border: 1px solid #E0E0E0;
+	// 	box-sizing: border-box;
+	// 	border-radius: 4px;
+	// 	padding-left: 18px;
 
-		input {
-			width: 468px;
-			border: none;
-			/* 2018 */
-			// position: absolute;
-			height: 29px;
-			font-family: 'PT Sans', sans-serif;
-			font-style: normal;
-			font-weight: normal;
-			line-height: normal;
-			font-size: 22px;
-			color: #555555;
-			outline: none;
-			margin-top: 20px;
-		}
+	// 	input {
+	// 		width: 468px;
+	// 		border: none;
+	// 		/* 2018 */
+	// 		// position: absolute;
+	// 		height: 29px;
+	// 		font-family: 'PT Sans', sans-serif;
+	// 		font-style: normal;
+	// 		font-weight: normal;
+	// 		line-height: normal;
+	// 		font-size: 22px;
+	// 		color: #555555;
+	// 		outline: none;
+	// 		margin-top: 20px;
+	// 	}
 
-		span {
-			/* Введите промокод */
-			position: absolute;
-			width: fit-content;
-			height: 24px;
-			font-family: 'PT Sans', sans-serif;
-			font-style: normal;
-			font-weight: normal;
-			line-height: normal;
-			font-size: 18px;
-			color: #ABABAB;
-			// transition
-			transition-property: left, top, font-size;
-			transition-timing-function: ease-in-out;
-			transition-duration: .3s;
+	// 	span {
+	// 		/* Введите промокод */
+	// 		position: absolute;
+	// 		width: fit-content;
+	// 		height: 24px;
+	// 		font-family: 'PT Sans', sans-serif;
+	// 		font-style: normal;
+	// 		font-weight: normal;
+	// 		line-height: normal;
+	// 		font-size: 18px;
+	// 		color: #ABABAB;
+	// 		// transition
+	// 		transition-property: left, top, font-size;
+	// 		transition-timing-function: ease-in-out;
+	// 		transition-duration: .3s;
 
-			&.aside {
-				/* Введите промокод */
-				font-size: 13px;
-				height: 17px;
-				top: 8px;
-			}
-		}
-	}
+	// 		&.aside {
+	// 			/* Введите промокод */
+	// 			font-size: 13px;
+	// 			height: 17px;
+	// 			top: 8px;
+	// 		}
+	// 	}
+	// }
 
-	div#input_password {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		// height: 44px;
-		height: 58px;
-		width: 468px;
-		margin-top: 27px;
-		position: relative;
-		// height: 64px;
-		background: #FFFFFF;
-		border: 1px solid #E0E0E0;
-		box-sizing: border-box;
-		border-radius: 4px;
-		padding-left: 18px;
+	// div#input_password {
+	// 	display: flex;
+	// 	flex-direction: row;
+	// 	align-items: center;
+	// 	// height: 44px;
+	// 	height: 58px;
+	// 	width: 468px;
+	// 	margin-top: 27px;
+	// 	position: relative;
+	// 	// height: 64px;
+	// 	background: #FFFFFF;
+	// 	border: 1px solid #E0E0E0;
+	// 	box-sizing: border-box;
+	// 	border-radius: 4px;
+	// 	padding-left: 18px;
 
-		input {
-			width: 468px;
-			border: none;
-			/* 2018 */
-			// position: absolute;
-			height: 29px;
-			font-family: 'PT Sans', sans-serif;
-			font-style: normal;
-			font-weight: normal;
-			line-height: normal;
-			font-size: 22px;
-			color: #555555;
-			outline: none;
-			margin-top: 20px;
-		}
+	// 	input {
+	// 		width: 468px;
+	// 		border: none;
+	// 		/* 2018 */
+	// 		// position: absolute;
+	// 		height: 29px;
+	// 		font-family: 'PT Sans', sans-serif;
+	// 		font-style: normal;
+	// 		font-weight: normal;
+	// 		line-height: normal;
+	// 		font-size: 22px;
+	// 		color: #555555;
+	// 		outline: none;
+	// 		margin-top: 20px;
+	// 	}
 
-		span {
-			/* Введите промокод */
-			position: absolute;
-			width: fit-content;
-			height: 24px;
-			font-family: 'PT Sans', sans-serif;
-			font-style: normal;
-			font-weight: normal;
-			line-height: normal;
-			font-size: 18px;
-			color: #ABABAB;
-			// transition
-			transition-property: left, top, font-size;
-			transition-timing-function: ease-in-out;
-			transition-duration: .3s;
+	// 	span {
+	// 		/* Введите промокод */
+	// 		position: absolute;
+	// 		width: fit-content;
+	// 		height: 24px;
+	// 		font-family: 'PT Sans', sans-serif;
+	// 		font-style: normal;
+	// 		font-weight: normal;
+	// 		line-height: normal;
+	// 		font-size: 18px;
+	// 		color: #ABABAB;
+	// 		// transition
+	// 		transition-property: left, top, font-size;
+	// 		transition-timing-function: ease-in-out;
+	// 		transition-duration: .3s;
 
-			&.aside {
-				/* Введите промокод */
-				font-size: 13px;
-				height: 17px;
-				top: 8px;
-			}
-		}
-	}
+	// 		&.aside {
+	// 			/* Введите промокод */
+	// 			font-size: 13px;
+	// 			height: 17px;
+	// 			top: 8px;
+	// 		}
+	// 	}
+	// }
 
-	div#button_login {
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		height: 60px;
-		margin-top: 24px;
-		background: linear-gradient(125.63deg, rgba(254, 159, 124, 0.3) 12.79%, rgba(254, 125, 123, 0.3) 95.63%), #FFFFFF;
-		box-shadow: 0px 5px 12px rgba(179, 83, 83, 0.07);
-		border-radius: 4px;
+	// div#button_login {
+	// 	display: flex;
+	// 	justify-content: space-around;
+	// 	align-items: center;
+	// 	height: 60px;
+	// 	margin-top: 24px;
+	// 	background: linear-gradient(125.63deg, rgba(254, 159, 124, 0.3) 12.79%, rgba(254, 125, 123, 0.3) 95.63%), #FFFFFF;
+	// 	box-shadow: 0px 5px 12px rgba(179, 83, 83, 0.07);
+	// 	border-radius: 4px;
 
-		span {
-			/* Войти */
-			font-family: 'PT Sans', sans-serif;
-			font-style: normal;
-			font-weight: bold;
-			line-height: normal;
-			font-size: 18px;
-			color: #FFFFFF;
-		}
+	// 	span {
+	// 		/* Войти */
+	// 		font-family: 'PT Sans', sans-serif;
+	// 		font-style: normal;
+	// 		font-weight: bold;
+	// 		line-height: normal;
+	// 		font-size: 18px;
+	// 		color: #FFFFFF;
+	// 	}
 
-		&.active {
-			background: linear-gradient(125.63deg, #FE9F7C 12.79%, #FE7D7B 95.63%);
-			box-shadow: 0px 5px 12px rgba(60, 28, 28, 0.21);
+	// 	&.active {
+	// 		background: linear-gradient(125.63deg, #FE9F7C 12.79%, #FE7D7B 95.63%);
+	// 		box-shadow: 0px 5px 12px rgba(60, 28, 28, 0.21);
 
-			&:hover {
-				box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
-				cursor: pointer;
-			}
-		}
-	}
+	// 		&:hover {
+	// 			box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.13);
+	// 			cursor: pointer;
+	// 		}
+	// 	}
+	// }
 
 	div#no_acc_no_pass {
 		display: flex;
