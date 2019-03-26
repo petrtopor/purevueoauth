@@ -10,6 +10,11 @@
       @input="onInput"
       ref='input')
     span(v-bind:class="{ aside: isSpanAside }") Введите почту, с которой отправляете письма
+    .error_email(v-if="showErrorEmail || showError")
+      .triangle
+      #hider
+      span Некорректный e-mail
+      span пожалуйста, проверьте введенный адрес
 </template>
 
 <style lang="less" scoped>
@@ -53,6 +58,81 @@ div#input_email {
     @media screen and (max-width: 469px) {
       width: 280px;
       margin-top: 8px;
+    }
+  }
+
+  .error_email {
+    /* Rectangle 4.2 */
+    position: absolute;
+    left: 468px;
+    top: 0px;
+    display: felx;
+    flex-direction: column;
+    justify-content: center;
+    width: 256px;
+    height: 80px;
+    background: #ffffff;
+    border: 1px solid #ededed;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    #hider {
+      position: absolute;
+      width: 32px;
+      height: 48px;
+      background-color: white;
+      left: 0px;
+      top: 0px;
+    }
+
+    .triangle {
+      transform: rotate(45deg);
+      background: #ffffff;
+      border: 1px solid #ededed;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      height: 17px;
+      width: 17px;
+      position: absolute;
+      left: -8px;
+      top: 12px;
+      border-right: none;
+      border-top: none;
+    }
+
+    span:nth-child(3) {
+      /* Зачем указывать телефон? */
+      position: absolute;
+      // width: 166px;
+      width: fit-content;
+      height: 19px;
+      top: 16px;
+      left: 6px;
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+      font-size: 14px;
+      color: #F75B26;
+    }
+
+    span:nth-child(4) {
+      /* На этот номер будут приходить уведомления, если клиент запросит звонок или задаст вопрос во время просмотра предложения. */
+      position: absolute;
+      // width: 195px;
+      width: fit-content;
+      height: 91px;
+      top: 42px;
+      left: 6px;
+      text-align: left;
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: normal;
+      line-height: normal;
+      font-size: 14px;
+      color: #a5a5a5;
     }
   }
 
@@ -101,7 +181,8 @@ export default {
     MaskedInput
   },
   props: {
-    initialText: String
+    initialText: String,
+    showError: Boolean
   },
   mounted() {
     if(this.initialText !== '') {
@@ -114,7 +195,8 @@ export default {
       selected: '',
       emailMask: emailMask,
       inputText: '',
-      isInputActive: false
+      isInputActive: false,
+      showErrorEmail: false
     }
   },
   computed: {
@@ -137,6 +219,8 @@ export default {
     },
     onInputFocus() {
       this.isInputActive = true
+      this.showErrorEmail = false
+      this.$emit('focus')
     },
     onInputBlur() {
       this.isInputActive = false

@@ -60,6 +60,8 @@ export default {
       if (this.isActive) {
         console.log('regClick emitted')
         this.$emit('regClick')
+      } else {
+        this.$emit('regClickInactive')
       }
     }, 100)
   }

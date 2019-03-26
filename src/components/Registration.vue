@@ -34,13 +34,13 @@
         </svg>
     #label_2
       span или зарегистрируйтесь, заполнив поля
-    <InputEmail @inputValidChange="onEmailInputValidChange" :initialText="RegEmail" v-if="showInputEmail"/>
-    <InputPhone @inputValidChange="onPhoneInputValidChange"/>
+    <InputEmail @inputValidChange="onEmailInputValidChange" :initialText="RegEmail" v-if="showInputEmail" :showError="showEmailError" @focus="onInputEmailFocus"/>
+    <InputPhone @inputValidChange="onPhoneInputValidChange" :showError="showPhoneError" @blur="onInputPhoneBlur" @focus="onInputPhoneFocus"/>
     #label_3
       span Какой CRM системой вы пользуетесь?
     <SelectorCrm @crmSelected="onCrmSelected" :isHighlighted="isCrmSelectorHighlighted"/>
     <InputPromo v-if="showInputPromo" @inputValidChange="onPromoInputValidChange"/>
-    <ButtonRegistration :isActive="isButtonRegistrationActive" :caption="'Зарегистрироваться бесплатно'" @regClick="onRegClick"/>
+    <ButtonRegistration :isActive="isButtonRegistrationActive" :caption="'Зарегистрироваться бесплатно'" @regClick="onRegClick" @regClickInactive="onRegClickInactive"/>
     #already_have
       #prm_mujud(@click='toggleShowInputPromo')
         span У меня есть промокод
@@ -314,13 +314,15 @@ export default {
   },
   mounted() {
     console.log('mounted')
-    Analytics.setPageView('/Account/Register')
-    Analytics.pageView("/Account/Register")
+    // Analytics.setPageView('/Account/Register')
+    // Analytics.pageView("/Account/Register")
     if(_.includes(window.location.path, 'from=invite')) {
       // Analytics.sendEvent('user', 'landing - from invite')
+      /*
       Analytics.sendEvent("user", "landing - from invite", "", "", () => {
         console.log('Analytics has been sent')
       })
+      */
     }
     const errorMessagesMap = {
       '4011': 'Ошибка идентификации!',
@@ -370,7 +372,9 @@ export default {
       RegPhone: '',
       CrmName: '',
       Promo: '',
-      Language: ''
+      Language: '',
+      showPhoneError: false,
+      showEmailError: false
     }
   },
   computed: {
@@ -379,12 +383,36 @@ export default {
     }
   },
   methods: {
+    onInputEmailFocus() {
+      console.log('onInputEmailFocus')
+      this.showEmailError = false
+    },
+    onInputPhoneFocus() {
+      console.log('onInputPhoneFocus')
+      this.showPhoneError = false
+    },
+    onInputPhoneBlur() {
+      if(this.isPhoneInputValid) {
+        this.showPhoneError = false
+      }
+    },
+    onRegClickInactive() {
+      console.log('onRegClickInactive')
+      if(!this.isPhoneInputValid) {
+        this.showPhoneError = true
+      } else {
+        this.showPhoneError = false
+      }
+      if(!this.isEmailInputValid) {
+        this.showEmailError = true
+      }
+    },
     onAccMujudClick() {
       window.location.href = '/oauth/Login'
     },
     onButtonMailMlrClick() {
       // Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
-      // Preloader.start()
+      Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
         console.log('ga has been sent')
         document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
@@ -393,7 +421,7 @@ export default {
     },
     onButtonMailYndClick() {
       // Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
-      // Preloader.start()
+      Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
         console.log('ga has been sent')
         document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
@@ -403,7 +431,7 @@ export default {
     },
     onButtonMailGmlClick() {
       // Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
-      // Preloader.start()
+      Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
         console.log('ga has been sent')
         document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo
@@ -460,7 +488,7 @@ export default {
               .catch(() => document.location.href = response.data.redirect_url)
             } else {
               Preloader.stop()
-              TMess.Error('Данный email занят! Войдите под ним или зарегистрируйте другой.')
+              TMess.Error('Такой e-mail уже зарегистрирован.')
             }
           })
           .catch(function(error) {

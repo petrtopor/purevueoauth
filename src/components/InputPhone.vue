@@ -20,6 +20,11 @@
       #hider
       span Зачем указывать телефон?
       span На этот номер будут приходить<br>уведомления, если клиент<br>запросит звонок или задаст<br>вопрос во время просмотра<br>предложения.
+    .error_phone(v-if="showErrorPhone || showError")
+      .triangle
+      #hider
+      span Ты ебанутый?
+      span Вместо нормального номера телефона ты ввёл хуету!<br>Введи нормальный номер или иди на хуй.
 </template>
 <style lang="less" scoped>
 div#input_phone {
@@ -142,7 +147,8 @@ div#input_phone {
     span:nth-child(3) {
       /* Зачем указывать телефон? */
       position: absolute;
-      width: 166px;
+      // width: 166px;
+      width: fit-content;
       height: 19px;
       top: 16px;
       left: 6px;
@@ -170,6 +176,81 @@ div#input_phone {
       color: #a5a5a5;
     }
   }
+
+  .error_phone {
+    /* Rectangle 4.2 */
+    position: absolute;
+    left: 468px;
+    top: 0px;
+    display: felx;
+    flex-direction: column;
+    justify-content: center;
+    width: 246px;
+    height: 150px;
+    background: #ffffff;
+    border: 1px solid #ededed;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    #hider {
+      position: absolute;
+      width: 32px;
+      height: 48px;
+      background-color: white;
+      left: 0px;
+      top: 0px;
+    }
+
+    .triangle {
+      transform: rotate(45deg);
+      background: #ffffff;
+      border: 1px solid #ededed;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 26px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      height: 17px;
+      width: 17px;
+      position: absolute;
+      left: -8px;
+      top: 12px;
+      border-right: none;
+      border-top: none;
+    }
+
+    span:nth-child(3) {
+      /* Зачем указывать телефон? */
+      position: absolute;
+      // width: 166px;
+      width: fit-content;
+      height: 19px;
+      top: 16px;
+      left: 6px;
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+      font-size: 14px;
+      color: #F75B26;
+    }
+
+    span:nth-child(4) {
+      /* На этот номер будут приходить уведомления, если клиент запросит звонок или задаст вопрос во время просмотра предложения. */
+      position: absolute;
+      // width: 195px;
+      width: fit-content;
+      height: 91px;
+      top: 42px;
+      left: 6px;
+      text-align: left;
+      font-family: PT Sans;
+      font-style: normal;
+      font-weight: normal;
+      line-height: normal;
+      font-size: 14px;
+      color: #a5a5a5;
+    }
+  }
 }
 </style>
 <script>
@@ -180,10 +261,14 @@ export default {
   components: {
     MaskedInput
   },
+  props: {
+    showError: Boolean
+  },
   data() {
     return {
       isInputActive: false,
-      inputText: ''
+      inputText: '',
+      showErrorPhone: false
     }
   },
   computed: {
@@ -205,13 +290,23 @@ export default {
       this.$refs.input.$el.focus()
     },
     onInputFocus() {
+      console.log('phone input focused')
       this.isInputActive = true
+      this.showErrorPhone = false
+      this.$emit('focus')
     },
     onInputBlur() {
+      this.$emit('blur')
+      console.log('onInputBlur')
       if (this.inputText === '(') {
         this.inputText = ''
       }
       this.isInputActive = false
+      if(!this.isValid && this.inputText !== '') {
+        this.showErrorPhone = true
+      } else {
+        this.showErrorPhone = false
+      }
     },
     onInput: _.debounce(function() {
       // this.$emit('inputValidChange', this.isValid)
