@@ -37,14 +37,14 @@ export default {
   mounted() {
 		// Analytics.sendEvent('user', 'registrated', 'oauth')
 		Analytics.sendEvent("user", "registrated - from invite", "oauth", "", () => {
-			console.log('Analytics has been sent')
+			// console.log('Analytics has been sent')
 			// return Promise.resolve('ga')
 		})
 		// _.delay(() => Promise.resolve('noga'), 10000)
 		/*
 		Promice.race([
 			Analytics.sendEvent("user", "registrated - from invite", "oauth", "", () => {
-				console.log('Analytics has been sent')
+				// console.log('Analytics has been sent')
 				return Promise.resolve(true)
 			}),
 			_.delay(() => Promise.resolve(false), 10000)
@@ -93,15 +93,15 @@ export default {
         })
         .then(response => {
           if(response.data.status === true) {
-            console.log('OK: ', response)
+            // console.log('OK: ', response)
             document.location.href = '/templates'
           } else {
-            console.log('not-OK: ', response)
+            // console.log('not-OK: ', response)
             TMess.Error('Не получилось... :(')
           }
         })
         .catch(error => {
-          console.log('ERROR: ', error)
+          // console.log('ERROR: ', error)
         })
       }
     }

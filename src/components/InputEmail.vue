@@ -69,7 +69,8 @@ div#input_email {
     display: felx;
     flex-direction: column;
     justify-content: center;
-    width: 256px;
+    // width: 256px;
+    width: 240px;
     height: 80px;
     background: #ffffff;
     border: 1px solid #ededed;
@@ -106,10 +107,11 @@ div#input_email {
       /* Зачем указывать телефон? */
       position: absolute;
       // width: 166px;
-      width: fit-content;
+      // width: fit-content;
+      max-width: 195px;
       height: 19px;
       top: 16px;
-      left: 6px;
+      left: 18px;
       font-family: PT Sans;
       font-style: normal;
       font-weight: bold;
@@ -122,10 +124,11 @@ div#input_email {
       /* На этот номер будут приходить уведомления, если клиент запросит звонок или задаст вопрос во время просмотра предложения. */
       position: absolute;
       // width: 195px;
-      width: fit-content;
+      // width: fit-content;
+      max-width: 195px;
       height: 91px;
       top: 42px;
-      left: 6px;
+      left: 18px;
       text-align: left;
       font-family: PT Sans;
       font-style: normal;
@@ -188,7 +191,7 @@ export default {
     if(this.initialText !== '') {
       this.inputText = this.initialText
     }
-    console.log('initialText received by InputEmail: ', this.initialText)
+    // console.log('initialText received by InputEmail: ', this.initialText)
   },
   data() {
     return {
@@ -211,7 +214,8 @@ export default {
   },
   methods: {
     onEnterPressed() {
-      console.log('ENTER button pressed in InputEmail field')
+      // console.log('ENTER button pressed in InputEmail field')
+      this.$emit('enterButtonPressed')
     },
     onSpanClick() {
       // this.$refs.input.$el.focus()
@@ -223,6 +227,11 @@ export default {
       this.$emit('focus')
     },
     onInputBlur() {
+      if(!this.isValid && this.inputText !== '') {
+        this.showErrorEmail = true
+      } else {
+        this.showErrorEmail = false
+      }
       this.isInputActive = false
     },
     onInput: _.debounce(function() {

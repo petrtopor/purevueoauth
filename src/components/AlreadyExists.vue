@@ -33,7 +33,7 @@ export default {
     }
   },
   created() {
-    console.log('AlreadyExists::created() FUCK YEAH')
+    // console.log('AlreadyExists::created() FUCK YEAH')
     // const email = '@ViewBag.currentEmail';
     // const showPasswordField = '@ViewBag.showPasswordField';
     // console.log('email: ', email)

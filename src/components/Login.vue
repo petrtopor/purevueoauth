@@ -38,7 +38,7 @@
     //- #input_email
     //-   input(type="text" value="")
     //-   span Введите ваш e-mail
-    <InputEmailLogin @inputValidChange="onInputValidChange"/>
+    <InputEmailLogin @inputValidChange="onInputValidChange" :showError="showEmailError" @focus="onInputEmailLoginFocus"/>
     //- #input_password
     //-   input(type="password" value="")
     //-   span Введите пароль
@@ -80,7 +80,8 @@ export default {
       email: '',
       isEmailValid: false,
       password: '',
-      showPasswordReset: false
+			showPasswordReset: false,
+			showEmailError: false,
     }
   },
   computed: {
@@ -120,6 +121,9 @@ export default {
     }
   },
   methods: {
+		onInputEmailLoginFocus() {
+			this.showEmailError = false
+		},
     onCloseNewPasswordCreation() {
       this.showNewPasswordCreation = false
     },
@@ -161,20 +165,20 @@ export default {
     },
     onLoginClick() {
       Preloader.start()
-      console.log('onLoginClick()')
+      // console.log('onLoginClick()')
       var payload = 'Email=' + this.email + '&Password=' + this.password
       axios.post('/Account/LoginAsinc', payload).then(response => {
-        console.log('OK/не-OK: ', response.data.auth)
+        // console.log('OK/не-OK: ', response.data.auth)
         if(response.data.auth) {
-          console.log('response: ', response)
+          // console.log('response: ', response)
           window.location.href = response.data.redirect
         } else {
           Preloader.stop()
           TMess.Error('Неверная пара логин/пароль')
-          console.log('response.data: ', response.data)
+          // console.log('response.data: ', response.data)
         }
       }).catch(error => {
-        console.log('error: ', error)
+        // console.log('error: ', error)
         Preloader.stop()
       })
     }

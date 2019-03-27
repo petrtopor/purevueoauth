@@ -49,7 +49,7 @@ export default {
     if(window.location.pathname.toLowerCase() === '/oauth/login') {
       this.currentComponent = 'login'
     } else {
-      console.log('unknown pathname: ', window.location.pathname.toLowerCase())
+      // console.log('unknown pathname: ', window.location.pathname.toLowerCase())
     }
   }
 }

@@ -325,11 +325,11 @@ export default {
         }))
         .then(function(response) {
           // eslint-disable-next-line
-          console.log('response.then: ', response);
+          // console.log('response.then: ', response);
         })
         .catch(function(error) {
           // eslint-disable-next-line
-          console.log('response.error: ', error);
+          // console.log('response.error: ', error);
         })
     }
   }

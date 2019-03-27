@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     onSpanClick() {
-      // console.log('onSpanClick: this.$refs.input: ', this.$refs.input)
+      // // console.log('onSpanClick: this.$refs.input: ', this.$refs.input)
       this.$refs.input.focus()
     },
     onInputFocus() {

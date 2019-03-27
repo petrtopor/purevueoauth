@@ -11,6 +11,7 @@
       @focus="onInputFocus"
       @blur="onInputBlur"
       @input="onInput"
+      @keyup.enter="onEnterPressed"
       ref='input')
     //- input(type='text' ref='input' @focus="onInputFocus" @blur="onInputBlur" v-model="inputText")
     //- span(v-bind:class="{ aside: isSpanAside }" @click="onSpanClick") Введите ваш телефон
@@ -23,8 +24,8 @@
     .error_phone(v-if="showErrorPhone || showError")
       .triangle
       #hider
-      span Ты ебанутый?
-      span Вместо нормального номера телефона ты ввёл хуету!<br>Введи нормальный номер или иди на хуй.
+      span Введён
+      span некорректный номер телефона
 </template>
 <style lang="less" scoped>
 div#input_phone {
@@ -111,7 +112,8 @@ div#input_phone {
     display: felx;
     flex-direction: column;
     justify-content: center;
-    width: 246px;
+    // width: 246px;
+    width: 240px;
     height: 150px;
     background: #ffffff;
     border: 1px solid #ededed;
@@ -151,7 +153,8 @@ div#input_phone {
       width: fit-content;
       height: 19px;
       top: 16px;
-      left: 6px;
+      // left: 6px;
+      left: 18px;
       font-family: PT Sans;
       font-style: normal;
       font-weight: bold;
@@ -166,7 +169,8 @@ div#input_phone {
       width: 195px;
       height: 91px;
       top: 42px;
-      left: 6px;
+      // left: 6px;
+      left: 18px;
       text-align: left;
       font-family: PT Sans;
       font-style: normal;
@@ -186,7 +190,7 @@ div#input_phone {
     flex-direction: column;
     justify-content: center;
     width: 246px;
-    height: 150px;
+    height: 80px;
     background: #ffffff;
     border: 1px solid #ededed;
     box-sizing: border-box;
@@ -225,7 +229,8 @@ div#input_phone {
       width: fit-content;
       height: 19px;
       top: 16px;
-      left: 6px;
+      // left: 6px;
+      left: 18px;
       font-family: PT Sans;
       font-style: normal;
       font-weight: bold;
@@ -241,7 +246,8 @@ div#input_phone {
       width: fit-content;
       height: 91px;
       top: 42px;
-      left: 6px;
+      // left: 6px;
+      left: 18px;
       text-align: left;
       font-family: PT Sans;
       font-style: normal;
@@ -262,7 +268,15 @@ export default {
     MaskedInput
   },
   props: {
-    showError: Boolean
+    showError: Boolean,
+    focused: Boolean
+  },
+  watch: {
+    focused(value) {
+      if(value) {
+        this.onSpanClick()
+      }
+    }
   },
   data() {
     return {
@@ -285,19 +299,22 @@ export default {
     }
   },
   methods: {
+    onEnterPressed() {
+      this.$emit('enterButtonPressed')
+    },
     onSpanClick() {
       // this.$refs.input.focus()
       this.$refs.input.$el.focus()
     },
     onInputFocus() {
-      console.log('phone input focused')
+      // console.log('phone input focused')
       this.isInputActive = true
       this.showErrorPhone = false
       this.$emit('focus')
     },
     onInputBlur() {
       this.$emit('blur')
-      console.log('onInputBlur')
+      // console.log('onInputBlur')
       if (this.inputText === '(') {
         this.inputText = ''
       }

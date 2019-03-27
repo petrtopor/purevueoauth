@@ -56,9 +56,9 @@ export default {
   },
   methods: {
     onClick: _.debounce(function() {
-      console.log('ButtonRegistration pressed')
+      // console.log('ButtonRegistration pressed')
       if (this.isActive) {
-        console.log('regClick emitted')
+        // console.log('regClick emitted')
         this.$emit('regClick')
       } else {
         this.$emit('regClickInactive')

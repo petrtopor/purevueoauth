@@ -12,7 +12,7 @@ export default {
   methods: {
     onClick() {
       // eslint-disable-next-line
-      console.log('ButtonLogin pressed')
+      // console.log('ButtonLogin pressed')
       if (this.isActive) {
         this.$emit('loginClick')
       }

@@ -31,7 +31,7 @@ export default {
       const token = /token=([^&]+)/.exec(document.location.href)[1]
       if(token !== '') {
         this.token = token
-        console.log('token extracted from the url: ', this.token)
+        // console.log('token extracted from the url: ', this.token)
       } else {
         TMess.Error('no token')
       }

@@ -34,8 +34,8 @@
         </svg>
     #label_2
       span или зарегистрируйтесь, заполнив поля
-    <InputEmail @inputValidChange="onEmailInputValidChange" :initialText="RegEmail" v-if="showInputEmail" :showError="showEmailError" @focus="onInputEmailFocus"/>
-    <InputPhone @inputValidChange="onPhoneInputValidChange" :showError="showPhoneError" @blur="onInputPhoneBlur" @focus="onInputPhoneFocus"/>
+    <InputEmail @inputValidChange="onEmailInputValidChange" :initialText="RegEmail" v-if="showInputEmail" :showError="showEmailError" @focus="onInputEmailFocus" @enterButtonPressed="onInputEmailEnterButtonPressed"/>
+    <InputPhone @inputValidChange="onPhoneInputValidChange" :showError="showPhoneError" @blur="onInputPhoneBlur" @focus="onInputPhoneFocus" :focused="phoneInputActive"/>
     #label_3
       span Какой CRM системой вы пользуетесь?
     <SelectorCrm @crmSelected="onCrmSelected" :isHighlighted="isCrmSelectorHighlighted"/>
@@ -313,14 +313,14 @@ export default {
     ButtonRegistration
   },
   mounted() {
-    console.log('mounted')
+    // console.log('mounted')
     // Analytics.setPageView('/Account/Register')
     // Analytics.pageView("/Account/Register")
     if(_.includes(window.location.path, 'from=invite')) {
       // Analytics.sendEvent('user', 'landing - from invite')
       /*
       Analytics.sendEvent("user", "landing - from invite", "", "", () => {
-        console.log('Analytics has been sent')
+        // console.log('Analytics has been sent')
       })
       */
     }
@@ -344,11 +344,11 @@ export default {
     if(/email=([^&]+)/.exec(document.location.href) !== null) {
       const email = /email=([^&]+)/.exec(document.location.href)[1]
       if(email !== '') {
-        console.log('email came from url: ', email)
+        // console.log('email came from url: ', email)
         // this.RegEmail = email
         this.$nextTick(() => {
           this.RegEmail = email
-          console.log('this.RegEmail: ', this.RegEmail)
+          // console.log('this.RegEmail: ', this.RegEmail)
           this.$forceUpdate()
           this.showInputEmail = true
         })
@@ -374,7 +374,8 @@ export default {
       Promo: '',
       Language: '',
       showPhoneError: false,
-      showEmailError: false
+      showEmailError: false,
+      phoneInputActive: false
     }
   },
   computed: {
@@ -383,12 +384,15 @@ export default {
     }
   },
   methods: {
+    onInputEmailEnterButtonPressed() {
+      this.phoneInputActive = true
+    },
     onInputEmailFocus() {
-      console.log('onInputEmailFocus')
+      // console.log('onInputEmailFocus')
       this.showEmailError = false
     },
     onInputPhoneFocus() {
-      console.log('onInputPhoneFocus')
+      // console.log('onInputPhoneFocus')
       this.showPhoneError = false
     },
     onInputPhoneBlur() {
@@ -397,7 +401,7 @@ export default {
       }
     },
     onRegClickInactive() {
-      console.log('onRegClickInactive')
+      // console.log('onRegClickInactive')
       if(!this.isPhoneInputValid) {
         this.showPhoneError = true
       } else {
@@ -414,7 +418,7 @@ export default {
       // Analytics.sendEvent('user', 'registration - social button clicked', 'mail')
       Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
-        console.log('ga has been sent')
+        // console.log('ga has been sent')
         document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo
       })
       // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Mail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
@@ -423,7 +427,7 @@ export default {
       // Analytics.sendEvent('user', 'registration - social button clicked', 'yandex')
       Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
-        console.log('ga has been sent')
+        // console.log('ga has been sent')
         document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo
       })
       // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Yandex&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
@@ -433,7 +437,7 @@ export default {
       // Analytics.sendEvent('user', 'registration - social button clicked', 'gmail')
       Preloader.start()
       Analytics.sendEvent("user", "registration - social button clicked", "mail", "", () => {
-        console.log('ga has been sent')
+        // console.log('ga has been sent')
         document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo
       })
       // _.delay(() => document.location.href = '/oauth/oauthBy?serviceType=Gmail&usageType=Registration&lang=ru&promocode=' + this.Promo, 1000)
@@ -478,7 +482,7 @@ export default {
           })
           .then(function(response) {
             // eslint-disable-next-line
-            // console.log('response.then: ', response);
+            // // console.log('response.then: ', response);
             if (response.data.is_success) {
               new Promise((resolve, reject) => {
                 Analytics.sendEvent("user", "registrated", "direct", "", () => resolve(true))
@@ -493,7 +497,7 @@ export default {
           })
           .catch(function(error) {
             // eslint-disable-next-line
-            console.log('response.error: ', error);
+            // console.log('response.error: ', error);
             Preloader.stop()
           })
       }

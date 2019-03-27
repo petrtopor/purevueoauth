@@ -32,7 +32,7 @@ export default {
       this.password2 = payload['value']
     },
     onCloseClick() {
-      console.log('onCloseClick')
+      // console.log('onCloseClick')
       this.$emit('closeNewPasswordCreation')
     },
     onButtonClick() {

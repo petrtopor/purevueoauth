@@ -167,20 +167,20 @@ export default {
     },
     onLoginClick() {
       Preloader.start()
-      console.log('onLoginClick()')
+      // console.log('onLoginClick()')
       var payload = 'Email=' + this.email + '&Password=' + this.password
       axios.post('/Account/LoginAsinc', payload).then(response => {
-        console.log('OK/не-OK: ', response.data.auth)
+        // console.log('OK/не-OK: ', response.data.auth)
         if(response.data.auth) {
-          console.log('response: ', response)
+          // console.log('response: ', response)
           window.location.href = response.data.redirect
         } else {
           Preloader.stop()
           TMess.Error('Неверная пара логин/пароль')
-          console.log('response.data: ', response.data)
+          // console.log('response.data: ', response.data)
         }
       }).catch(error => {
-        console.log('error: ', error)
+        // console.log('error: ', error)
         Preloader.stop()
       })
     }

@@ -64,7 +64,7 @@ export default {
       var response = await axios.get(
         'https://api.b2bfamily.com/version/v2/promo/' + this.inputText
       )
-      console.log('response: ', response)
+      // console.log('response: ', response)
       if (response.data !== null) {
         this.isPromoCorrect = true
       } else {
