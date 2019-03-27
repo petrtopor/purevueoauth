@@ -24,8 +24,7 @@
     .error_phone(v-if="showErrorPhone || showError")
       .triangle
       #hider
-      span Введён
-      span некорректный номер телефона
+      span Введён некорректный номер телефона
 </template>
 <style lang="less" scoped>
 div#input_phone {
@@ -186,10 +185,10 @@ div#input_phone {
     position: absolute;
     left: 468px;
     top: 0px;
-    display: felx;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 246px;
+    width: 240px;
     height: 80px;
     background: #ffffff;
     border: 1px solid #ededed;
@@ -222,7 +221,7 @@ div#input_phone {
       border-top: none;
     }
 
-    span:nth-child(3) {
+    span {
       /* Зачем указывать телефон? */
       position: absolute;
       // width: 166px;
@@ -237,7 +236,25 @@ div#input_phone {
       line-height: normal;
       font-size: 14px;
       color: #F75B26;
+      text-align: left;
     }
+    
+    // span:nth-child(3) {
+    //   /* Зачем указывать телефон? */
+    //   position: absolute;
+    //   // width: 166px;
+    //   width: fit-content;
+    //   height: 19px;
+    //   top: 16px;
+    //   // left: 6px;
+    //   left: 18px;
+    //   font-family: PT Sans;
+    //   font-style: normal;
+    //   font-weight: bold;
+    //   line-height: normal;
+    //   font-size: 14px;
+    //   color: #F75B26;
+    // }
 
     span:nth-child(4) {
       /* На этот номер будут приходить уведомления, если клиент запросит звонок или задаст вопрос во время просмотра предложения. */
